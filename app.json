@@ -4,7 +4,10 @@
     "web": {
       "bundler": "metro"
     },
-    "name": "quiz-me-app",
-    "slug": "quiz-me-app"
+    "name": "Quiz Me",
+    "slug": "quiz-me-app",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "backgroundColor": "#001524"
   }
 }

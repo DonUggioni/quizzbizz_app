@@ -22,6 +22,8 @@ import icon29 from '../assets/icons/icon-29.png';
 import icon30 from '../assets/icons/icon-30.png';
 import icon31 from '../assets/icons/icon-31.png';
 import icon32 from '../assets/icons/icon-32.png';
+import menuIcon from '../assets/icons/menu-icon.png';
+import profileIcon from '../assets/icons/profile-icon.png';
 
 export const ICONS = {
   'icon-9': icon9,
@@ -48,4 +50,6 @@ export const ICONS = {
   'icon-30': icon30,
   'icon-31': icon31,
   'icon-32': icon32,
+  profileIcon,
+  menuIcon,
 };
