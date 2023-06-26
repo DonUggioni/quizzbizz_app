@@ -1,10 +1,10 @@
 import { View, Text } from 'react-native';
 
-import { styles } from './customHeader.styles';
-import HeaderIcon from '../headerIcon/HeaderIcon';
-import { ICONS } from '../../constants';
+import { styles } from './customHomeHeader.styles';
+import { ICONS } from '../../../constants';
+import HeaderIcon from '../../headerIcon/HeaderIcon';
 
-export default function CustomHeader() {
+export default function CustomHomeHeader() {
   return (
     <View style={styles.container}>
       <HeaderIcon source={ICONS.menuIcon} btnWidth={30} btnHeight={20} />

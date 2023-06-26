@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { COLORS, FONT, SIZES } from '../../constants';
+import { COLORS, FONT, PADDING, SIZES } from '../../../constants';
 
 export const styles = StyleSheet.create({
   container: {
@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 24,
+    paddingHorizontal: PADDING.large,
     elevation: 10,
     shadowColor: '#000000',
   },

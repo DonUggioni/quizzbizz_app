@@ -24,6 +24,22 @@ const SIZES = {
   xxLarge: 32,
 };
 
+const PADDING = {
+  small: 8,
+  medium: 16,
+  large: 24,
+  xLarge: 36,
+  xxLarge: 48,
+};
+
+const MARGIN = {
+  small: 8,
+  medium: 16,
+  large: 24,
+  xLarge: 36,
+  xxLarge: 48,
+};
+
 const SHADOWS = {
   small: {
     shadowColor: '#000',
@@ -47,4 +63,4 @@ const SHADOWS = {
   },
 };
 
-export { COLORS, FONT, SIZES, SHADOWS };
+export { COLORS, FONT, SIZES, SHADOWS, MARGIN, PADDING };

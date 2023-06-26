@@ -2,9 +2,15 @@ import { Image, TouchableOpacity } from 'react-native';
 
 import { styles } from './headerIcon.style';
 
-export default function HeaderIcon({ source, btnWidth, btnHeight, style }) {
+export default function HeaderIcon({
+  source,
+  btnWidth,
+  btnHeight,
+  style,
+  onPress,
+}) {
   return (
-    <TouchableOpacity style={[styles.btnContainer, style]}>
+    <TouchableOpacity style={[styles.btnContainer, style]} onPress={onPress}>
       <Image
         resizeMode='cover'
         source={source}
