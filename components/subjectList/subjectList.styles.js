@@ -13,4 +13,9 @@ export const styles = StyleSheet.create({
     letterSpacing: 0.5,
     marginBottom: MARGIN.medium,
   },
+  errorText: {
+    color: COLORS.white,
+    fontFamily: FONT.regular,
+    letterSpacing: 0.5,
+  },
 });

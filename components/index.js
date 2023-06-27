@@ -3,6 +3,7 @@ import HeaderIcon from './headerIcon/HeaderIcon';
 import PointsDisplay from './pointsDisplay/PointsDisplay';
 import SubjectList from './subjectList/SubjectList';
 import ActionButton from './actionButton/ActionButton';
+import QuestionsInfoBar from './questionsInfoBar/QuestionsInfoBar';
 
 export {
   CustomHomeHeader,
@@ -10,4 +11,5 @@ export {
   PointsDisplay,
   SubjectList,
   ActionButton,
+  QuestionsInfoBar,
 };

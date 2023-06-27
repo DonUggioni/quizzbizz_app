@@ -2,6 +2,7 @@ import { View } from 'react-native';
 import { Stack } from 'expo-router';
 import { COLORS } from '../../constants';
 import GeneralHeader from '../../components/customHeaders/generalHeader/GeneralHeader';
+import QuestionsInfoBar from '../../components/questionsInfoBar/QuestionsInfoBar';
 
 export default function Questions() {
   return (
@@ -16,6 +17,8 @@ export default function Questions() {
           header: () => <GeneralHeader />,
         }}
       />
+
+      <QuestionsInfoBar />
     </View>
   );
 }
