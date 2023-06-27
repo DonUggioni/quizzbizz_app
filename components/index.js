@@ -2,8 +2,11 @@ import CustomHomeHeader from './customHeaders/homeHeader/CustomHomeHeader';
 import HeaderIcon from './headerIcon/HeaderIcon';
 import PointsDisplay from './pointsDisplay/PointsDisplay';
 import SubjectList from './subjectList/SubjectList';
+import QuestionList from './questionList/QuestionList';
 import ActionButton from './actionButton/ActionButton';
 import QuestionsInfoBar from './questionsInfoBar/QuestionsInfoBar';
+import QuestionBox from './questionBox/QuestionBox';
+import FinishCard from './finishCard/FinishCard';
 
 export {
   CustomHomeHeader,
@@ -12,4 +15,7 @@ export {
   SubjectList,
   ActionButton,
   QuestionsInfoBar,
+  QuestionBox,
+  QuestionList,
+  FinishCard,
 };

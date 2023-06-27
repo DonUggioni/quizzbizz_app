@@ -1,12 +1,18 @@
 import { View } from 'react-native';
 import { Stack } from 'expo-router';
-import { COLORS } from '../../constants';
+import { COLORS, PADDING } from '../../constants';
 import GeneralHeader from '../../components/customHeaders/generalHeader/GeneralHeader';
-import QuestionsInfoBar from '../../components/questionsInfoBar/QuestionsInfoBar';
+import { QuestionBox, QuestionList, QuestionsInfoBar } from '../../components';
 
 export default function Questions() {
   return (
-    <View style={{ flex: 1, backgroundColor: COLORS.primary }}>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: COLORS.primary,
+        paddingHorizontal: PADDING.large,
+      }}
+    >
       <Stack.Screen
         options={{
           headerStyle: {
@@ -18,7 +24,9 @@ export default function Questions() {
         }}
       />
 
-      <QuestionsInfoBar />
+      <QuestionsInfoBar width={100} />
+      <QuestionBox />
+      <QuestionList />
     </View>
   );
 }

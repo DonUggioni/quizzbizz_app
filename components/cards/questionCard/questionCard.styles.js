@@ -13,15 +13,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     paddingHorizontal: PADDING.medium,
-  },
-  imgContainer: {
-    width: 40,
-    height: 40,
-    marginRight: MARGIN.medium,
-  },
-  image: {
-    width: '100%',
-    height: '100%',
+    marginBottom: MARGIN.medium,
   },
   subject: {
     fontSize: SIZES.large,

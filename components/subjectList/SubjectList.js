@@ -1,21 +1,15 @@
 import { useState } from 'react';
 import { View, Text, FlatList, ActivityIndicator } from 'react-native';
-import SubjectCard from '../cards/subjectCard/SubjectCard';
+
+import { useRouter } from 'expo-router';
 
 import { COLORS, ICONS, MARGIN } from '../../constants';
 import { styles } from './subjectList.styles';
+import SubjectCard from '../cards/subjectCard/SubjectCard';
 import ActionButton from '../actionButton/ActionButton';
 
-import { useRouter } from 'expo-router';
 import useFetch from '../../hooks/useFetch';
-
-function removeGeneralCategory(str) {
-  if (!str.includes(':')) return str;
-
-  let formattedStr = str.split(':').slice(1);
-
-  return formattedStr.join('').trim();
-}
+import { removeGeneralCategory } from '../../utils/functions';
 
 export default function SubjectList() {
   const router = useRouter();
@@ -74,6 +68,7 @@ export default function SubjectList() {
       />
       <ActionButton
         onPress={() => router.push(`/questions/${activeSubject.id}`)}
+        text={'Quiz Me'}
       />
     </View>
   );
