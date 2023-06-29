@@ -1,5 +1,6 @@
 import { Stack } from 'expo-router';
 import { useFonts } from 'expo-font';
+import ContextProvider from '../context/context';
 
 export const unstable_settings = {
   // Ensure any route can link back to `/`
@@ -16,8 +17,10 @@ export default function Layout() {
     return null;
   }
   return (
-    <Stack initialRouteName='home'>
-      <Stack.Screen name='home' />
-    </Stack>
+    <ContextProvider>
+      <Stack initialRouteName='home'>
+        <Stack.Screen name='home' />
+      </Stack>
+    </ContextProvider>
   );
 }

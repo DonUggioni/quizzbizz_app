@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { View, Text, FlatList, ActivityIndicator } from 'react-native';
 
 import { useRouter } from 'expo-router';
@@ -8,19 +8,47 @@ import { styles } from './subjectList.styles';
 import SubjectCard from '../cards/subjectCard/SubjectCard';
 import ActionButton from '../actionButton/ActionButton';
 
-import useFetch from '../../hooks/useFetch';
 import { removeGeneralCategory } from '../../utils/functions';
+import { getData } from '../../utils/functions';
+import { useAppContext } from '../../context/context';
 
 export default function SubjectList() {
   const router = useRouter();
-  const { data, isLoading, error } = useFetch('api_category.php');
+  const { dispatch, state } = useAppContext();
   const [activeSubject, setActiveSubject] = useState(null);
+
+  const fetchData = async (endpoint) => {
+    dispatch({ type: 'FETCH_DATA_REQUEST' });
+    try {
+      const result = await getData(endpoint);
+      dispatch({
+        type: 'FETCH_DATA_SUCCESS',
+        payload: result,
+      });
+    } catch (error) {
+      console.log(error);
+      dispatch({ type: 'FETCH_DATA_ERROR' });
+    }
+  };
+
+  useEffect(() => {
+    fetchData('api_category.php');
+  }, []);
 
   function handleCardPress(subject) {
     setActiveSubject(subject);
+    dispatch({ type: 'CURRENT_SUBJECT', payload: subject });
   }
 
-  if (isLoading) {
+  function submitHandler() {
+    fetchData(`api.php?amount=15&category=${activeSubject.id}`);
+
+    setTimeout(() => {
+      router.push(`/questions/${activeSubject.id}`);
+    }, 2000);
+  }
+
+  if (state.isLoading) {
     return (
       <View
         style={[
@@ -33,7 +61,7 @@ export default function SubjectList() {
     );
   }
 
-  if (error) {
+  if (state.error) {
     return (
       <View
         style={[
@@ -50,26 +78,25 @@ export default function SubjectList() {
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>Pick a subject</Text>
-      <FlatList
-        data={data.trivia_categories}
-        showsVerticalScrollIndicator={false}
-        renderItem={({ item }) => (
-          <SubjectCard
-            source={ICONS[`icon-${item.id}`]}
-            subject={removeGeneralCategory(item.name)}
-            onPress={() => handleCardPress(item)}
-            isActive={activeSubject?.name === item.name}
-          />
-        )}
-        keyExtractor={(item) => item.id}
-        contentContainerStyle={{
-          rowGap: MARGIN.medium,
-        }}
-      />
-      <ActionButton
-        onPress={() => router.push(`/questions/${activeSubject.id}`)}
-        text={'Quiz Me'}
-      />
+      {state.quizData.trivia_categories && (
+        <FlatList
+          data={state.quizData.trivia_categories}
+          showsVerticalScrollIndicator={false}
+          renderItem={({ item }) => (
+            <SubjectCard
+              source={ICONS[`icon-${item.id}`]}
+              subject={removeGeneralCategory(item.name)}
+              onPress={() => handleCardPress(item)}
+              isActive={activeSubject?.name === item.name}
+            />
+          )}
+          keyExtractor={(item) => item.id}
+          contentContainerStyle={{
+            rowGap: MARGIN.medium,
+          }}
+        />
+      )}
+      <ActionButton onPress={() => submitHandler()} text={'Quiz Me'} />
     </View>
   );
 }

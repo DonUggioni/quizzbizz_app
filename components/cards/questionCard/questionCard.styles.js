@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
     marginBottom: MARGIN.medium,
   },
   subject: {
-    fontSize: SIZES.large,
+    fontSize: SIZES.medium,
     fontFamily: FONT.regular,
     color: COLORS.white,
     letterSpacing: 0.5,

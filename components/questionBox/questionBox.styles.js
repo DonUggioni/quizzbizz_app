@@ -13,6 +13,6 @@ export const styles = StyleSheet.create({
     color: COLORS.white,
     fontFamily: FONT.regular,
     letterSpacing: 0.5,
-    fontSize: SIZES.large,
+    fontSize: SIZES.medium,
   },
 });

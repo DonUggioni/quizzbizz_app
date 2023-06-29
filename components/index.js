@@ -7,6 +7,7 @@ import ActionButton from './actionButton/ActionButton';
 import QuestionsInfoBar from './questionsInfoBar/QuestionsInfoBar';
 import QuestionBox from './questionBox/QuestionBox';
 import FinishCard from './finishCard/FinishCard';
+import ModalWindow from './modal/Modal';
 
 export {
   CustomHomeHeader,
@@ -18,4 +19,5 @@ export {
   QuestionBox,
   QuestionList,
   FinishCard,
+  ModalWindow,
 };

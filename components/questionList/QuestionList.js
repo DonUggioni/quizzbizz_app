@@ -1,28 +1,84 @@
+import { useMemo, useState } from 'react';
 import { View } from 'react-native';
+import he from 'he';
 
 import QuestionCard from '../cards/questionCard/QuestionCard';
 import ActionButton from '../actionButton/ActionButton';
 
-import { styles } from './questionList.styles';
-import { useRouter } from 'expo-router';
+import { shuffleArray } from '../../utils/functions';
 
-const question = [
-  { question: 'Lorem ipsum dolor sit amet.', id: 1 },
-  { question: 'Lorem ipsum dolor sit amet.', id: 2 },
-  { question: 'Lorem ipsum dolor sit amet.', id: 3 },
-  { question: 'Lorem ipsum dolor sit amet.', id: 4 },
-];
+import { useRouter } from 'expo-router';
+import { styles } from './questionList.styles';
+import { useAppContext } from '../../context/context';
+
+const EASY_QUESTION_POINTS = 10;
+const MEDIUM_QUESTION_POINTS = 15;
+const HARD_QUESTION_POINTS = 20;
 
 export default function QuestionList() {
+  const [choosenAnswer, setChoosenAnswer] = useState(null);
+  const [answerStyle, setAnswerStyle] = useState('');
   const router = useRouter();
+  const { dispatch, state } = useAppContext();
+
+  const incorrectAnswers =
+    state.quizData?.results[state.index]?.incorrect_answers;
+  const correctAnswer = state.quizData?.results[state.index]?.correct_answer;
+  const questionDifficulty = state.quizData?.results[state.index]?.difficulty;
+  const currentAnswersArray = [...incorrectAnswers, correctAnswer];
+
+  const shuffledAnswers = useMemo(() => {
+    return shuffleArray(currentAnswersArray);
+  }, [state?.index]);
+
+  function nextHandler() {
+    const updatedAnswerStyle = shuffledAnswers.map((answer) => {
+      if (answer === correctAnswer) {
+        return styles.isCorrect;
+      } else if (answer === choosenAnswer) {
+        return styles.isIncorrect;
+      } else {
+        return '';
+      }
+    });
+    setAnswerStyle(updatedAnswerStyle);
+
+    if (choosenAnswer === correctAnswer) {
+      if (questionDifficulty === 'easy') {
+        dispatch({ type: 'ADD_POINTS', payload: EASY_QUESTION_POINTS });
+      }
+      if (questionDifficulty === 'medium') {
+        dispatch({ type: 'ADD_POINTS', payload: MEDIUM_QUESTION_POINTS });
+      }
+      if (questionDifficulty === 'hard') {
+        dispatch({ type: 'ADD_POINTS', payload: HARD_QUESTION_POINTS });
+      }
+    }
+
+    setTimeout(() => {
+      dispatch({ type: 'NEXT_QUESTION' });
+      setAnswerStyle('');
+    }, 1500);
+  }
+
   return (
     <View style={styles.container}>
-      {question.map((item) => {
-        return <QuestionCard question={item.question} key={item.id} />;
+      {shuffledAnswers?.map((answer, index) => {
+        return (
+          <QuestionCard
+            question={he.decode(answer)}
+            key={answer}
+            onPress={() => setChoosenAnswer(answer)}
+            isActive={answer === choosenAnswer}
+            answerStyle={answerStyle[index]}
+          />
+        );
       })}
       <ActionButton
-        text={'Submit'}
-        onPress={() => router.push('/finishStats/')}
+        text={
+          state.quizData?.results.length === state.index + 1 ? 'Finish' : 'Next'
+        }
+        onPress={() => nextHandler()}
       />
     </View>
   );
