@@ -29,4 +29,11 @@ async function getData(endpoint) {
     throw error;
   }
 }
-export { removeGeneralCategory, shuffleArray, getData };
+
+// Calculates the percentage of correct answers, takes in the number of correct answers and total number of questions.
+function calculatePercentage(correctAnswers, totalNumOfQuestions) {
+  const percentage = (correctAnswers / totalNumOfQuestions) * 100;
+  return Math.floor(percentage);
+}
+
+export { removeGeneralCategory, shuffleArray, getData, calculatePercentage };

@@ -41,7 +41,7 @@ export default function SubjectList() {
   }
 
   function submitHandler() {
-    fetchData(`api.php?amount=15&category=${activeSubject.id}`);
+    fetchData(`api.php?amount=2&category=${activeSubject.id}`);
 
     setTimeout(() => {
       router.push(`/questions/${activeSubject.id}`);

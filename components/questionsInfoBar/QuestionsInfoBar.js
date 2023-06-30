@@ -14,7 +14,7 @@ export default function QuestionsInfoBar() {
       <View style={styles.infoContainer}>
         <Text style={styles.text}>
           Question: <Text style={styles.highlightText}>{state?.index + 1}</Text>
-          /{state?.quizData.results.length}
+          /{state?.quizData?.results.length}
         </Text>
         <Text style={styles.text}>
           Points: <Text style={styles.highlightText}>{state?.points}</Text>

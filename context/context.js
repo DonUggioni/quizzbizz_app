@@ -11,6 +11,8 @@ const initialState = {
   isLoading: false,
   error: false,
   modalVisible: false,
+  correctAnswers: 0,
+  timerTime: 30,
 };
 
 function ContextProvider({ children }) {

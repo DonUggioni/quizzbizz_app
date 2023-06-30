@@ -18,6 +18,10 @@ const reducer = (state, action) => {
       return { ...state, modalVisible: true };
     case 'HIDE_MODAL':
       return { ...state, modalVisible: false };
+    case 'ADD_CORRECT_ANSWER':
+      return { ...state, correctAnswers: state.correctAnswers + 1 };
+    case 'RESTART':
+      return { ...state, correctAnswers: 0, points: 0, index: 0 };
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
   }

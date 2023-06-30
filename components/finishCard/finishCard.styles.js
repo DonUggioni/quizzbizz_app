@@ -4,7 +4,6 @@ import { COLORS, FONT, MARGIN, PADDING, SIZES } from '../../constants';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: COLORS.primary,
     padding: PADDING.large,
@@ -18,6 +17,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10,
+    marginBottom: 5,
   },
   pointsContainer: {
     marginBottom: MARGIN.large,
@@ -41,5 +41,9 @@ export const styles = StyleSheet.create({
   },
   paddingBottom: {
     paddingBottom: PADDING.xLarge,
+  },
+  btnContainer: {
+    backgroundColor: COLORS.primary,
+    padding: PADDING.large,
   },
 });

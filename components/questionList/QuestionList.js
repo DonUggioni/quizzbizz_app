@@ -1,13 +1,13 @@
 import { useMemo, useState } from 'react';
 import { View } from 'react-native';
 import he from 'he';
+import { useRouter } from 'expo-router';
 
 import QuestionCard from '../cards/questionCard/QuestionCard';
 import ActionButton from '../actionButton/ActionButton';
 
 import { shuffleArray } from '../../utils/functions';
 
-import { useRouter } from 'expo-router';
 import { styles } from './questionList.styles';
 import { useAppContext } from '../../context/context';
 
@@ -44,6 +44,7 @@ export default function QuestionList() {
     setAnswerStyle(updatedAnswerStyle);
 
     if (choosenAnswer === correctAnswer) {
+      if (!choosenAnswer) return;
       if (questionDifficulty === 'easy') {
         dispatch({ type: 'ADD_POINTS', payload: EASY_QUESTION_POINTS });
       }
@@ -53,9 +54,13 @@ export default function QuestionList() {
       if (questionDifficulty === 'hard') {
         dispatch({ type: 'ADD_POINTS', payload: HARD_QUESTION_POINTS });
       }
+      dispatch({ type: 'ADD_CORRECT_ANSWER' });
     }
 
     setTimeout(() => {
+      if (state.index + 1 === state.quizData?.results.length) {
+        router.replace('/finishStats');
+      }
       dispatch({ type: 'NEXT_QUESTION' });
       setAnswerStyle('');
     }, 1500);

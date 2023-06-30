@@ -1,11 +1,48 @@
+import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 
 import { styles } from './progressBar.styles';
+import { useAppContext } from '../../../context/context';
 
-export default function ProgressBar({ progressBarWidth }) {
+import { useRouter } from 'expo-router';
+
+export default function ProgressBar() {
+  const router = useRouter();
+  const { state, dispatch } = useAppContext();
+  const [timerPercentage, setTimerPercentage] = useState(0);
+
+  let timeInterval;
+
+  function timer() {
+    let totalTimePerQuestion = state?.timerTime;
+    let remainingTime = totalTimePerQuestion;
+
+    timeInterval = setInterval(() => {
+      remainingTime--;
+      if (remainingTime === 0) {
+        if (state.index + 1 === state.quizData?.results.length) {
+          router.replace('/finishStats');
+        }
+        dispatch({ type: 'NEXT_QUESTION' });
+      }
+      setTimerPercentage(
+        Math.floor((remainingTime / totalTimePerQuestion) * 100)
+      );
+    }, 1000);
+  }
+
+  useEffect(() => {
+    setTimerPercentage(100);
+    timer();
+
+    return () => {
+      clearInterval(timeInterval);
+    };
+  }, [state?.index]);
+
   return (
     <View style={styles.container}>
-      <View style={styles.bar(`${progressBarWidth}%`)} />
+      <View style={styles.bar(`${timerPercentage}%`)} />
     </View>
   );
 }
