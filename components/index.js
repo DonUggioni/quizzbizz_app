@@ -8,6 +8,7 @@ import QuestionsInfoBar from './questionsInfoBar/QuestionsInfoBar';
 import QuestionBox from './questionBox/QuestionBox';
 import FinishCard from './finishCard/FinishCard';
 import ModalWindow from './modal/Modal';
+import LoadingScreen from './loadingScreen/LoadingScreen';
 
 export {
   CustomHomeHeader,
@@ -20,4 +21,5 @@ export {
   QuestionList,
   FinishCard,
   ModalWindow,
+  LoadingScreen,
 };

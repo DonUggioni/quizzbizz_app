@@ -11,6 +11,7 @@ import ActionButton from '../actionButton/ActionButton';
 import { removeGeneralCategory } from '../../utils/functions';
 import { getData } from '../../utils/functions';
 import { useAppContext } from '../../context/context';
+import LoadingScreen from '../loadingScreen/LoadingScreen';
 
 export default function SubjectList() {
   const router = useRouter();
@@ -42,9 +43,14 @@ export default function SubjectList() {
 
   function submitHandler() {
     fetchData(`api.php?amount=2&category=${activeSubject.id}`);
+    dispatch({ type: 'SHOW_LOADING_SCREEN' });
 
     setTimeout(() => {
-      router.push(`/questions/${activeSubject.id}`);
+      router.replace(`/questions/${activeSubject.id}`);
+    }, 1000);
+
+    setTimeout(() => {
+      dispatch({ type: 'HIDE_LOADING_SCREEN' });
     }, 2000);
   }
 
@@ -71,6 +77,19 @@ export default function SubjectList() {
       >
         <Text style={styles.errorText}>Something went wrong.</Text>
         <Text style={styles.errorText}>Please try again.</Text>
+      </View>
+    );
+  }
+
+  if (state.loadingScreen) {
+    return (
+      <View
+        style={[
+          styles.container,
+          { alignItems: 'center', justifyContent: 'center' },
+        ]}
+      >
+        <LoadingScreen />
       </View>
     );
   }

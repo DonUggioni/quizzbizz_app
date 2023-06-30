@@ -22,6 +22,10 @@ const reducer = (state, action) => {
       return { ...state, correctAnswers: state.correctAnswers + 1 };
     case 'RESTART':
       return { ...state, correctAnswers: 0, points: 0, index: 0 };
+    case 'SHOW_LOADING_SCREEN':
+      return { ...state, loadingScreen: true };
+    case 'HIDE_LOADING_SCREEN':
+      return { ...state, loadingScreen: false };
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
   }

@@ -15,7 +15,9 @@ export default function Home() {
     >
       <Stack.Screen
         options={{
-          header: () => <CustomHomeHeader />,
+          header: () => {
+            return <CustomHomeHeader />;
+          },
         }}
       />
 

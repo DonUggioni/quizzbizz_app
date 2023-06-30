@@ -1,7 +1,7 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { View } from 'react-native';
 import he from 'he';
-import { useRouter } from 'expo-router';
+import { useRouter, useSearchParams } from 'expo-router';
 
 import QuestionCard from '../cards/questionCard/QuestionCard';
 import ActionButton from '../actionButton/ActionButton';
@@ -10,6 +10,7 @@ import { shuffleArray } from '../../utils/functions';
 
 import { styles } from './questionList.styles';
 import { useAppContext } from '../../context/context';
+import LoadingScreen from '../loadingScreen/LoadingScreen';
 
 const EASY_QUESTION_POINTS = 10;
 const MEDIUM_QUESTION_POINTS = 15;
@@ -63,7 +64,7 @@ export default function QuestionList() {
       }
       dispatch({ type: 'NEXT_QUESTION' });
       setAnswerStyle('');
-    }, 1500);
+    }, 1200);
   }
 
   return (
@@ -81,7 +82,9 @@ export default function QuestionList() {
       })}
       <ActionButton
         text={
-          state.quizData?.results.length === state.index + 1 ? 'Finish' : 'Next'
+          state?.quizData?.results.length === state?.index + 1
+            ? 'Finish'
+            : 'Next'
         }
         onPress={() => nextHandler()}
       />

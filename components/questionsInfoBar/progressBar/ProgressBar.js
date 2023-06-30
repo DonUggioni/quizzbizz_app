@@ -9,18 +9,17 @@ import { useRouter } from 'expo-router';
 export default function ProgressBar() {
   const router = useRouter();
   const { state, dispatch } = useAppContext();
-  const [timerPercentage, setTimerPercentage] = useState(0);
+  const [timerPercentage, setTimerPercentage] = useState(100);
 
   let timeInterval;
 
   function timer() {
     let totalTimePerQuestion = state?.timerTime;
     let remainingTime = totalTimePerQuestion;
-
     timeInterval = setInterval(() => {
       remainingTime--;
       if (remainingTime === 0) {
-        if (state.index + 1 === state.quizData?.results.length) {
+        if (state?.index + 1 === state.quizData?.results.length) {
           router.replace('/finishStats');
         }
         dispatch({ type: 'NEXT_QUESTION' });
