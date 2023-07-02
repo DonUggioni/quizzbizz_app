@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { View } from 'react-native';
 import he from 'he';
 import { useRouter, useSearchParams } from 'expo-router';
@@ -10,7 +10,6 @@ import { shuffleArray } from '../../utils/functions';
 
 import { styles } from './questionList.styles';
 import { useAppContext } from '../../context/context';
-import LoadingScreen from '../loadingScreen/LoadingScreen';
 
 const EASY_QUESTION_POINTS = 10;
 const MEDIUM_QUESTION_POINTS = 15;
@@ -59,7 +58,7 @@ export default function QuestionList() {
     }
 
     setTimeout(() => {
-      if (state.index + 1 === state.quizData?.results.length) {
+      if (state?.index + 1 === state.quizData.results?.length) {
         router.replace('/finishStats');
       }
       dispatch({ type: 'NEXT_QUESTION' });
@@ -82,7 +81,7 @@ export default function QuestionList() {
       })}
       <ActionButton
         text={
-          state?.quizData?.results.length === state?.index + 1
+          state.quizData.results?.length === state?.index + 1
             ? 'Finish'
             : 'Next'
         }

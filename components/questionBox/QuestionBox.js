@@ -7,9 +7,7 @@ import { styles } from './questionBox.styles';
 export default function QuestionBox() {
   const { state } = useAppContext();
 
-  if (!state.quizData) return;
-
-  const question = state?.quizData?.results[state.index]?.question;
+  const question = state.quizData.results[state.index]?.question;
 
   return (
     <View style={styles.questionBox}>

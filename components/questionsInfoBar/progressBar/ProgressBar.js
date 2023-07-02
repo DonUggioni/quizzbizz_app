@@ -14,20 +14,19 @@ export default function ProgressBar() {
   let timeInterval;
 
   function timer() {
-    let totalTimePerQuestion = state?.timerTime;
+    let totalTimePerQuestion = state.timerTime;
     let remainingTime = totalTimePerQuestion;
     timeInterval = setInterval(() => {
-      remainingTime--;
-      if (remainingTime === 0) {
-        if (state?.index + 1 === state.quizData?.results.length) {
+      remainingTime -= 0.01;
+      if (remainingTime <= 0) {
+        if (state?.index + 1 === state.quizData?.results?.length) {
           router.replace('/finishStats');
         }
         dispatch({ type: 'NEXT_QUESTION' });
       }
-      setTimerPercentage(
-        Math.floor((remainingTime / totalTimePerQuestion) * 100)
-      );
-    }, 1000);
+      const formattedTime = remainingTime.toFixed(2);
+      setTimerPercentage(((formattedTime / totalTimePerQuestion) * 1000) / 10);
+    }, 10);
   }
 
   useEffect(() => {

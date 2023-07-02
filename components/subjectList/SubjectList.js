@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
-import { View, Text, FlatList, ActivityIndicator } from 'react-native';
+import { useEffect, useMemo, useState } from 'react';
+import { View, Text, FlatList } from 'react-native';
 
 import { useRouter } from 'expo-router';
 
-import { COLORS, ICONS, MARGIN } from '../../constants';
+import { ICONS, MARGIN } from '../../constants';
 import { styles } from './subjectList.styles';
 import SubjectCard from '../cards/subjectCard/SubjectCard';
 import ActionButton from '../actionButton/ActionButton';
@@ -13,19 +13,24 @@ import { getData } from '../../utils/functions';
 import { useAppContext } from '../../context/context';
 import LoadingScreen from '../loadingScreen/LoadingScreen';
 
+const DEFAULT_NUM_OF_QUESTIONS = 15;
+
 export default function SubjectList() {
   const router = useRouter();
   const { dispatch, state } = useAppContext();
   const [activeSubject, setActiveSubject] = useState(null);
 
   const fetchData = async (endpoint) => {
-    dispatch({ type: 'FETCH_DATA_REQUEST' });
+    dispatch({ type: 'SHOW_LOADING_SCREEN' });
     try {
       const result = await getData(endpoint);
       dispatch({
         type: 'FETCH_DATA_SUCCESS',
         payload: result,
       });
+      setTimeout(() => {
+        dispatch({ type: 'HIDE_LOADING_SCREEN' });
+      }, 2000);
     } catch (error) {
       console.log(error);
       dispatch({ type: 'FETCH_DATA_ERROR' });
@@ -36,20 +41,23 @@ export default function SubjectList() {
     fetchData('api_category.php');
   }, []);
 
+  const loadingAnimation = useMemo(() => {
+    return <LoadingScreen />;
+  }, [state.isLoading]);
+
   function handleCardPress(subject) {
     setActiveSubject(subject);
     dispatch({ type: 'CURRENT_SUBJECT', payload: subject });
   }
 
   function submitHandler() {
-    fetchData(`api.php?amount=2&category=${activeSubject.id}`);
     dispatch({ type: 'SHOW_LOADING_SCREEN' });
+    fetchData(
+      `api.php?amount=${DEFAULT_NUM_OF_QUESTIONS}&category=${activeSubject.id}`
+    );
 
     setTimeout(() => {
       router.replace(`/questions/${activeSubject.id}`);
-    }, 1000);
-
-    setTimeout(() => {
       dispatch({ type: 'HIDE_LOADING_SCREEN' });
     }, 2000);
   }
@@ -62,7 +70,7 @@ export default function SubjectList() {
           { alignItems: 'center', justifyContent: 'center' },
         ]}
       >
-        <ActivityIndicator size={'large'} color={COLORS.secondary} />
+        {loadingAnimation}
       </View>
     );
   }
@@ -77,19 +85,6 @@ export default function SubjectList() {
       >
         <Text style={styles.errorText}>Something went wrong.</Text>
         <Text style={styles.errorText}>Please try again.</Text>
-      </View>
-    );
-  }
-
-  if (state.loadingScreen) {
-    return (
-      <View
-        style={[
-          styles.container,
-          { alignItems: 'center', justifyContent: 'center' },
-        ]}
-      >
-        <LoadingScreen />
       </View>
     );
   }

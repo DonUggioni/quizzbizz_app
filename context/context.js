@@ -12,8 +12,7 @@ const initialState = {
   error: false,
   modalVisible: false,
   correctAnswers: 0,
-  timerTime: 30,
-  loadingScreen: false,
+  timerTime: 15,
 };
 
 function ContextProvider({ children }) {

@@ -26,19 +26,37 @@ export default function FinishCard() {
     router.replace('/home');
   }
 
+  function animation() {
+    if (percentageOfCorrectAnswers >= 75) {
+      return ANIMATIONS.throphyAnimation;
+    }
+
+    if (percentageOfCorrectAnswers > 45 && percentageOfCorrectAnswers < 75) {
+      return ANIMATIONS.thumbsUp;
+    }
+
+    return ANIMATIONS.sadEmoji;
+  }
+
   return (
     <>
       <View style={styles.container}>
         <View style={styles.statsContainer}>
           <Lottie
-            source={ANIMATIONS.throphyAnimation}
+            source={animation()}
             style={styles.animationSize}
             autoPlay
             loop={false}
-            speed={1}
           />
           <View style={styles.pointsContainer}>
-            <Text style={styles.heading}>Congratulations!</Text>
+            <Text style={styles.heading}>
+              {percentageOfCorrectAnswers >= 75
+                ? 'Great job!'
+                : percentageOfCorrectAnswers > 45 &&
+                  percentageOfCorrectAnswers < 75
+                ? 'Good job!'
+                : 'Oh boy!'}
+            </Text>
             <Text style={styles.text}>
               Score:{' '}
               <Text style={styles.highlightOrange}>{state.points}pts</Text>

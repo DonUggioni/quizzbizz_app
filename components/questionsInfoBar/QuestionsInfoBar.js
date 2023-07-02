@@ -9,7 +9,7 @@ import ProgressBar from './progressBar/ProgressBar';
 export default function QuestionsInfoBar() {
   const { state } = useAppContext();
 
-  const numOfQuestions = state?.quizData?.results.length;
+  const numOfQuestions = state.quizData.results?.length;
 
   return (
     <View style={styles.container}>
