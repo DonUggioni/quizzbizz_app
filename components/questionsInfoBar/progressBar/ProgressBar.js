@@ -17,14 +17,14 @@ export default function ProgressBar() {
     let totalTimePerQuestion = state.timerTime;
     let remainingTime = totalTimePerQuestion;
     timeInterval = setInterval(() => {
-      remainingTime -= 0.01;
+      remainingTime -= 0.001 * totalTimePerQuestion;
       if (remainingTime <= 0) {
         if (state?.index + 1 === state.quizData?.results?.length) {
           router.replace('/finishStats');
         }
         dispatch({ type: 'NEXT_QUESTION' });
       }
-      const formattedTime = remainingTime.toFixed(2);
+      const formattedTime = remainingTime.toFixed(3);
       setTimerPercentage(((formattedTime / totalTimePerQuestion) * 1000) / 10);
     }, 10);
   }

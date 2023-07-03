@@ -1,23 +1,18 @@
-import { useState } from 'react';
 import { View, Text, Image } from 'react-native';
 import HeaderIcon from '../../headerIcon/HeaderIcon';
 
 import { styles } from './generalHeader.styles';
 import { ICONS } from '../../../constants';
 
-import { useRouter } from 'expo-router';
 import { useAppContext } from '../../../context/context';
 
 import { removeGeneralCategory } from '../../../utils/functions';
-import ModalWindow from '../../modal/Modal';
 
-export default function GeneralHeader({ icon, title }) {
-  const router = useRouter();
+export default function GeneralHeader() {
   const { state, dispatch } = useAppContext();
 
   function closeHandler() {
     dispatch({ type: 'SHOW_MODAL' });
-    // router.replace('/home');
   }
 
   return (

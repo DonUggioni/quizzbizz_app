@@ -61,8 +61,8 @@ export default function QuestionList() {
       if (state?.index + 1 === state.quizData.results?.length) {
         router.replace('/finishStats');
       }
-      dispatch({ type: 'NEXT_QUESTION' });
       setAnswerStyle('');
+      dispatch({ type: 'NEXT_QUESTION' });
     }, 1200);
   }
 

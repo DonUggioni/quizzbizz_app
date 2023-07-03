@@ -11,7 +11,13 @@ const reducer = (state, action) => {
     case 'ADD_POINTS':
       return { ...state, points: state.points + action.payload };
     case 'CANCEL_QUIZ':
-      return { ...state, points: 0, index: 0, modalVisible: false };
+      return {
+        ...state,
+        points: 0,
+        index: 0,
+        correctAnswers: 0,
+        modalVisible: false,
+      };
     case 'SHOW_MODAL':
       return { ...state, modalVisible: true };
     case 'HIDE_MODAL':

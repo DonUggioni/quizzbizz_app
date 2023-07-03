@@ -33,10 +33,12 @@ export const styles = StyleSheet.create({
   btnStay: {
     backgroundColor: COLORS.orange,
     width: '40%',
+    borderRadius: 10,
   },
   btnLeave: {
     borderColor: COLORS.orange,
     width: '40%',
+    borderRadius: 10,
   },
   btnText: {
     letterSpacing: 0.5,
