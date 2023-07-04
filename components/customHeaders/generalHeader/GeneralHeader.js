@@ -8,7 +8,7 @@ import { useAppContext } from '../../../context/context';
 
 import { removeGeneralCategory } from '../../../utils/functions';
 
-export default function GeneralHeader() {
+export default function GeneralHeader({ title, icon }) {
   const { state, dispatch } = useAppContext();
 
   function closeHandler() {
@@ -20,19 +20,25 @@ export default function GeneralHeader() {
       <View style={styles.titleContainer}>
         <View style={styles.imgContainer}>
           <Image
-            source={ICONS[`icon-${state.currentSubject.id}`]}
+            source={
+              state.currentSubject?.id
+                ? ICONS[`icon-${state.currentSubject?.id}`]
+                : icon
+            }
             resizeMode='contain'
             style={styles.img}
           />
         </View>
         <Text style={styles.title}>
-          {removeGeneralCategory(state.currentSubject.name)}
+          {removeGeneralCategory(
+            state.currentSubject?.name ? state.currentSubject.name : title
+          )}
         </Text>
       </View>
       <HeaderIcon
         source={ICONS.closeIcon}
-        btnHeight={18}
-        btnWidth={18}
+        btnHeight={20}
+        btnWidth={20}
         onPress={() => closeHandler()}
       />
     </View>

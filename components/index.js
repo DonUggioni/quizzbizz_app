@@ -9,6 +9,8 @@ import QuestionBox from './questionBox/QuestionBox';
 import FinishCard from './finishCard/FinishCard';
 import ModalWindow from './modal/Modal';
 import LoadingScreen from './loadingScreen/LoadingScreen';
+import Options from './optionsScreen/Options';
+import SettingsHeader from './customHeaders/settingsHeader/SettingsHeader';
 
 export {
   CustomHomeHeader,
@@ -22,4 +24,6 @@ export {
   FinishCard,
   ModalWindow,
   LoadingScreen,
+  Options,
+  SettingsHeader,
 };

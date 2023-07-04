@@ -17,8 +17,8 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   imgContainer: {
-    width: 36,
-    height: 36,
+    width: 30,
+    height: 30,
     marginRight: MARGIN.large,
   },
   img: {

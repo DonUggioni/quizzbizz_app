@@ -26,7 +26,7 @@ export default function ProgressBar() {
       }
       const formattedTime = remainingTime.toFixed(3);
       setTimerPercentage(((formattedTime / totalTimePerQuestion) * 1000) / 10);
-    }, 10);
+    }, 20);
   }
 
   useEffect(() => {
