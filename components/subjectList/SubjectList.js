@@ -13,7 +13,9 @@ import { getData } from '../../utils/functions';
 import { useAppContext } from '../../context/context';
 import LoadingScreen from '../loadingScreen/LoadingScreen';
 
-const DEFAULT_NUM_OF_QUESTIONS = 15;
+import Animated, { FadeInDown } from 'react-native-reanimated';
+
+const DEFAULT_NUM_OF_QUESTIONS = 2;
 
 export default function SubjectList() {
   const router = useRouter();
@@ -92,25 +94,31 @@ export default function SubjectList() {
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>Pick a subject</Text>
-      {state.quizData.trivia_categories && (
-        <FlatList
-          data={state.quizData.trivia_categories}
-          showsVerticalScrollIndicator={false}
-          renderItem={({ item }) => (
-            <SubjectCard
-              source={ICONS[`icon-${item.id}`]}
-              subject={removeGeneralCategory(item.name)}
-              onPress={() => handleCardPress(item)}
-              isActive={activeSubject?.name === item.name}
-            />
-          )}
-          keyExtractor={(item) => item.id}
-          contentContainerStyle={{
-            rowGap: MARGIN.medium,
-          }}
-        />
+      <FlatList
+        data={state.quizData.trivia_categories}
+        showsVerticalScrollIndicator={false}
+        renderItem={({ item }) => (
+          <SubjectCard
+            source={ICONS[`icon-${item.id}`]}
+            subject={removeGeneralCategory(item.name)}
+            onPress={() => handleCardPress(item)}
+            isActive={activeSubject?.name === item.name}
+          />
+        )}
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={{
+          rowGap: MARGIN.medium,
+        }}
+      />
+      {activeSubject !== null && (
+        <Animated.View entering={FadeInDown.duration(400)}>
+          <ActionButton
+            disabled={activeSubject === null ? true : false}
+            onPress={() => submitHandler()}
+            text={'Quiz Me'}
+          />
+        </Animated.View>
       )}
-      <ActionButton onPress={() => submitHandler()} text={'Quiz Me'} />
     </View>
   );
 }

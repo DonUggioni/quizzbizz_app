@@ -1,4 +1,5 @@
 import { View } from 'react-native';
+import Animated, { BounceInLeft, SlideOutRight } from 'react-native-reanimated';
 
 import { styles } from './loadingScreen.styles';
 
@@ -13,7 +14,11 @@ export default function LoadingScreen() {
   const random = getRandomNumber();
 
   return (
-    <View style={styles.container}>
+    <Animated.View
+      style={styles.container}
+      entering={BounceInLeft}
+      exiting={SlideOutRight}
+    >
       <Lottie
         source={ANIMATIONS[`loading-${random}`]}
         style={styles.animationSize}
@@ -21,6 +26,6 @@ export default function LoadingScreen() {
         loop={true}
         speed={1}
       />
-    </View>
+    </Animated.View>
   );
 }

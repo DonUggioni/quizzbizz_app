@@ -5,7 +5,7 @@ import GeneralHeader from '../../components/customHeaders/generalHeader/GeneralH
 import {
   ModalWindow,
   QuestionBox,
-  QuestionList,
+  AnswerList,
   QuestionsInfoBar,
 } from '../../components';
 
@@ -40,7 +40,7 @@ export default function Questions() {
         />
         <QuestionsInfoBar width={100} />
         <QuestionBox />
-        <QuestionList />
+        <AnswerList />
       </View>
     </PaperProvider>
   );

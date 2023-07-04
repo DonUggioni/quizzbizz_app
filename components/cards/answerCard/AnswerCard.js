@@ -1,6 +1,6 @@
-import { Text, TouchableOpacity } from 'react-native';
+import { Text, Pressable } from 'react-native';
 
-import { styles } from './questionCard.styles';
+import { styles } from './answerCard.styles';
 import { COLORS } from '../../../constants';
 
 export default function QuestionCard({
@@ -15,8 +15,8 @@ export default function QuestionCard({
   };
 
   return (
-    <TouchableOpacity style={[containerStyle, answerStyle]} onPress={onPress}>
+    <Pressable style={[containerStyle, answerStyle]} onPress={onPress}>
       <Text style={styles.subject}>{question}</Text>
-    </TouchableOpacity>
+    </Pressable>
   );
 }

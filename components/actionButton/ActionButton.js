@@ -1,11 +1,11 @@
-import { TouchableOpacity, Text } from 'react-native';
+import { Text, Pressable } from 'react-native';
 
 import { styles } from './actionButton.styles';
 
-export default function ActionButton({ onPress, text }) {
+export default function ActionButton({ onPress, text, disabled }) {
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
+    <Pressable style={styles.container} disabled={disabled} onPress={onPress}>
       <Text style={styles.text}>{text}</Text>
-    </TouchableOpacity>
+    </Pressable>
   );
 }

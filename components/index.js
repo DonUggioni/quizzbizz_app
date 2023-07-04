@@ -2,7 +2,7 @@ import CustomHomeHeader from './customHeaders/homeHeader/CustomHomeHeader';
 import HeaderIcon from './headerIcon/HeaderIcon';
 import PointsDisplay from './pointsDisplay/PointsDisplay';
 import SubjectList from './subjectList/SubjectList';
-import QuestionList from './questionList/QuestionList';
+import AnswerList from './answerList/AnswerList';
 import ActionButton from './actionButton/ActionButton';
 import QuestionsInfoBar from './questionsInfoBar/QuestionsInfoBar';
 import QuestionBox from './questionBox/QuestionBox';
@@ -18,7 +18,7 @@ export {
   ActionButton,
   QuestionsInfoBar,
   QuestionBox,
-  QuestionList,
+  AnswerList,
   FinishCard,
   ModalWindow,
   LoadingScreen,

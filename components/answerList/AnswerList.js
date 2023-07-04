@@ -1,14 +1,14 @@
 import { useMemo, useState } from 'react';
 import { View } from 'react-native';
 import he from 'he';
-import { useRouter, useSearchParams } from 'expo-router';
+import { useRouter } from 'expo-router';
 
-import QuestionCard from '../cards/questionCard/QuestionCard';
+import AnswerCard from '../cards/answerCard/AnswerCard';
 import ActionButton from '../actionButton/ActionButton';
 
 import { shuffleArray } from '../../utils/functions';
 
-import { styles } from './questionList.styles';
+import { styles } from './answerList.styles';
 import { useAppContext } from '../../context/context';
 
 const EASY_QUESTION_POINTS = 10;
@@ -70,7 +70,7 @@ export default function QuestionList() {
     <View style={styles.container}>
       {shuffledAnswers?.map((answer, index) => {
         return (
-          <QuestionCard
+          <AnswerCard
             question={he.decode(answer)}
             key={answer}
             onPress={() => setChoosenAnswer(answer)}

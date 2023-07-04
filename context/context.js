@@ -5,14 +5,13 @@ const AppContext = createContext();
 
 const initialState = {
   quizData: [],
-  currentSubject: {},
   points: 0,
   index: 0,
   isLoading: false,
   error: false,
   modalVisible: false,
   correctAnswers: 0,
-  timerTime: 15,
+  timerTime: 20,
 };
 
 function ContextProvider({ children }) {

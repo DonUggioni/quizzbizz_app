@@ -10,6 +10,8 @@ import ActionButton from '../actionButton/ActionButton';
 
 import { useRouter } from 'expo-router';
 
+import Animated, { BounceInUp, FadeInDown } from 'react-native-reanimated';
+
 export default function FinishCard() {
   const { state, dispatch } = useAppContext();
   const router = useRouter();
@@ -41,7 +43,7 @@ export default function FinishCard() {
   return (
     <>
       <View style={styles.container}>
-        <View style={styles.statsContainer}>
+        <Animated.View entering={BounceInUp} style={styles.statsContainer}>
           <Lottie
             source={animation()}
             style={styles.animationSize}
@@ -73,10 +75,12 @@ export default function FinishCard() {
               questions.
             </Text>
           </View>
-        </View>
+        </Animated.View>
       </View>
       <View style={styles.btnContainer}>
-        <ActionButton text={'Quiz Me Again'} onPress={() => restartQuiz()} />
+        <Animated.View entering={FadeInDown.delay(1200).duration(1200)}>
+          <ActionButton text={'Quiz Me Again'} onPress={() => restartQuiz()} />
+        </Animated.View>
       </View>
     </>
   );
