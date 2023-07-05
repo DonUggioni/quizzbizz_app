@@ -35,6 +35,11 @@ const reducer = (state, action) => {
       return { ...state, isLoading: true };
     case 'HIDE_LOADING_SCREEN':
       return { ...state, isLoading: false };
+    case 'UPDATE_USER_PREFERENCES':
+      return { ...state, userPreferences: action.payload };
+    case 'SET_CURRENT_SUBJECT':
+      return { ...state, currentSubject: action.payload };
+
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
   }

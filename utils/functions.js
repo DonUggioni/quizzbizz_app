@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // This function removes the word of the general category, for example: 'Entertainment: Comics' becomes 'Comics'
 function removeGeneralCategory(str) {
-  if (!str.includes(':')) return str;
+  if (!str?.includes(':')) return str;
 
   let formattedStr = str.split(':').slice(1);
 
@@ -20,9 +20,11 @@ function shuffleArray(array) {
 }
 
 // This function get the data from the Database
-async function getData(endpoint) {
+async function getData(endpoint, params) {
   try {
-    const response = await axios.get(`https://opentdb.com/${endpoint}`);
+    const response = await axios.get(`https://opentdb.com/${endpoint}`, {
+      params: params,
+    });
     return response.data;
   } catch (error) {
     console.error('Error fetching data:', error);

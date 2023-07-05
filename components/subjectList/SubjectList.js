@@ -3,7 +3,7 @@ import { View, Text, FlatList } from 'react-native';
 
 import { useRouter } from 'expo-router';
 
-import { ICONS, MARGIN } from '../../constants';
+import { ICONS } from '../../constants';
 import { styles } from './subjectList.styles';
 import SubjectCard from '../cards/subjectCard/SubjectCard';
 import ActionButton from '../actionButton/ActionButton';
@@ -14,18 +14,17 @@ import { useAppContext } from '../../context/context';
 import LoadingScreen from '../loadingScreen/LoadingScreen';
 
 import Animated, { FadeInDown } from 'react-native-reanimated';
-
-const DEFAULT_NUM_OF_QUESTIONS = 2;
+import PointsDisplay from '../pointsDisplay/PointsDisplay';
 
 export default function SubjectList() {
   const router = useRouter();
   const { dispatch, state } = useAppContext();
   const [activeSubject, setActiveSubject] = useState(null);
 
-  const fetchData = async (endpoint) => {
+  async function fetchData(endpoint, params) {
     dispatch({ type: 'SHOW_LOADING_SCREEN' });
     try {
-      const result = await getData(endpoint);
+      const result = await getData(endpoint, params);
       dispatch({
         type: 'FETCH_DATA_SUCCESS',
         payload: result,
@@ -37,31 +36,39 @@ export default function SubjectList() {
       console.log(error);
       dispatch({ type: 'FETCH_DATA_ERROR' });
     }
-  };
+  }
 
   useEffect(() => {
     fetchData('api_category.php');
   }, []);
 
+  function handleCardPress(item) {
+    setActiveSubject(item);
+    dispatch({ type: 'SET_CURRENT_SUBJECT', payload: item });
+  }
+
   const loadingAnimation = useMemo(() => {
     return <LoadingScreen />;
   }, [state.isLoading]);
 
-  function handleCardPress(subject) {
-    setActiveSubject(subject);
-    dispatch({ type: 'CURRENT_SUBJECT', payload: subject });
-  }
-
   function submitHandler() {
     dispatch({ type: 'SHOW_LOADING_SCREEN' });
-    fetchData(
-      `api.php?amount=${DEFAULT_NUM_OF_QUESTIONS}&category=${activeSubject.id}`
-    );
+
+    const params = {
+      amount: state?.userPreferences.numOfQuestions,
+      category: activeSubject?.id,
+    };
+
+    if (state.userPreferences?.difficulty !== null) {
+      params.difficulty = state?.userPreferences.difficulty;
+    }
+
+    fetchData('api.php', params);
 
     setTimeout(() => {
       router.replace(`/questions/${activeSubject.id}`);
       dispatch({ type: 'HIDE_LOADING_SCREEN' });
-    }, 2000);
+    }, 2500);
   }
 
   if (state.isLoading) {
@@ -93,6 +100,7 @@ export default function SubjectList() {
 
   return (
     <View style={styles.container}>
+      <PointsDisplay />
       <Text style={styles.heading}>Pick a subject</Text>
       <FlatList
         data={state.quizData.trivia_categories}
@@ -106,9 +114,6 @@ export default function SubjectList() {
           />
         )}
         keyExtractor={(item) => item.id}
-        contentContainerStyle={{
-          rowGap: MARGIN.medium,
-        }}
       />
       {activeSubject !== null && (
         <Animated.View entering={FadeInDown.duration(400)}>

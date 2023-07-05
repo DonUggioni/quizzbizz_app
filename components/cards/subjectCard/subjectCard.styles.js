@@ -13,6 +13,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     paddingHorizontal: PADDING.medium,
+    marginBottom: MARGIN.medium,
   },
   imgContainer: {
     width: 40,

@@ -31,7 +31,7 @@ export default function GeneralHeader({ title, icon }) {
         </View>
         <Text style={styles.title}>
           {removeGeneralCategory(
-            state.currentSubject?.name ? state.currentSubject.name : title
+            state.currentSubject?.name ? state.currentSubject?.name : title
           )}
         </Text>
       </View>

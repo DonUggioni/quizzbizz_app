@@ -2,7 +2,7 @@ import { View } from 'react-native';
 import { Stack } from 'expo-router';
 
 import { COLORS } from '../constants';
-import { CustomHomeHeader, PointsDisplay, SubjectList } from '../components';
+import { CustomHomeHeader, SubjectList } from '../components';
 import { PaperProvider } from 'react-native-paper';
 
 export default function Home() {
@@ -23,7 +23,6 @@ export default function Home() {
           }}
         />
 
-        <PointsDisplay />
         <SubjectList />
       </View>
     </PaperProvider>

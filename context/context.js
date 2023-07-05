@@ -3,9 +3,16 @@ import reducer from '../reducer/reducer';
 
 const AppContext = createContext();
 
+const DEFAULT_NUM_OF_QUESTIONS = 15;
+
 const initialState = {
   quizData: [],
+  userPreferences: {
+    difficulty: null,
+    numOfQuestions: DEFAULT_NUM_OF_QUESTIONS,
+  },
   points: 0,
+  totalPoints: 0,
   index: 0,
   isLoading: false,
   error: false,

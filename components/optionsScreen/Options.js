@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { View } from 'react-native';
 import { Button } from 'react-native-paper';
 
@@ -11,12 +12,14 @@ import {
 } from '../../utils/optionsData';
 
 import { useRouter } from 'expo-router';
-import { useState } from 'react';
+
+import { useAppContext } from '../../context/context';
 
 export default function Options() {
   const router = useRouter();
+  const { dispatch } = useAppContext();
   const [userSettings, setUserSettings] = useState({
-    difficulty: '',
+    difficulty: null,
     numOfQuestions: '',
   });
 
@@ -31,6 +34,11 @@ export default function Options() {
       default:
         return userSettings;
     }
+  }
+
+  function saveHandler() {
+    dispatch({ type: 'UPDATE_USER_PREFERENCES', payload: userSettings });
+    router.back();
   }
 
   return (
@@ -63,6 +71,7 @@ export default function Options() {
           theme={{ colors: { primary: COLORS.orange } }}
           labelStyle={styles.btnText}
           rippleColor={'transparent'}
+          onPress={() => saveHandler()}
         >
           Save
         </Button>
