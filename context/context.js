@@ -11,6 +11,7 @@ const initialState = {
     difficulty: null,
     numOfQuestions: DEFAULT_NUM_OF_QUESTIONS,
   },
+  currentSubject: {},
   points: 0,
   totalPoints: 0,
   index: 0,
@@ -18,7 +19,7 @@ const initialState = {
   error: false,
   modalVisible: false,
   correctAnswers: 0,
-  timerTime: 20,
+  timerTime: 30,
 };
 
 function ContextProvider({ children }) {

@@ -38,4 +38,15 @@ function calculatePercentage(correctAnswers, totalNumOfQuestions) {
   return Math.floor(percentage);
 }
 
-export { removeGeneralCategory, shuffleArray, getData, calculatePercentage };
+///////////////////////////////////////
+function capitalizeFirstChar(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+export {
+  removeGeneralCategory,
+  shuffleArray,
+  getData,
+  calculatePercentage,
+  capitalizeFirstChar,
+};

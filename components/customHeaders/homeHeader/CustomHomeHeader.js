@@ -23,6 +23,7 @@ export default function CustomHomeHeader() {
         btnWidth={35}
         btnHeight={35}
         style={{ paddingTop: 12 }}
+        onPress={() => router.push('/auth')}
       />
     </View>
   );

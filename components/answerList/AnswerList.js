@@ -32,6 +32,7 @@ export default function QuestionList() {
   }, [state?.index]);
 
   function nextHandler() {
+    if (!choosenAnswer) return;
     const updatedAnswerStyle = shuffledAnswers.map((answer) => {
       if (answer === correctAnswer) {
         return styles.isCorrect;
@@ -42,6 +43,7 @@ export default function QuestionList() {
       }
     });
     setAnswerStyle(updatedAnswerStyle);
+    setChoosenAnswer(null);
 
     if (choosenAnswer === correctAnswer) {
       if (!choosenAnswer) return;

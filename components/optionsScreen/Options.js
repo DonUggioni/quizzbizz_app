@@ -14,13 +14,14 @@ import {
 import { useRouter } from 'expo-router';
 
 import { useAppContext } from '../../context/context';
+import { capitalizeFirstChar } from '../../utils/functions';
 
 export default function Options() {
   const router = useRouter();
-  const { dispatch } = useAppContext();
+  const { state, dispatch } = useAppContext();
   const [userSettings, setUserSettings] = useState({
     difficulty: null,
-    numOfQuestions: '',
+    numOfQuestions: state?.userPreferences.numOfQuestions,
   });
 
   // This function is recieving the data coming from the "Selector" component, this way, you can updated the app state from here by pressing the Save button and dispatching an action
@@ -48,11 +49,16 @@ export default function Options() {
           data={DIFFICULTY_OPTIONS}
           title={'Select a default difficulty level'}
           onSelected={onSelect}
+          currentValue={
+            state?.userPreferences.difficulty !== null &&
+            capitalizeFirstChar(state?.userPreferences.difficulty)
+          }
         />
         <Selector
           data={NUM_OF_QUESTIONS_OPTIONS}
           title={'Select the number of questions per game'}
           onSelected={onSelect}
+          currentValue={state?.userPreferences.numOfQuestions}
         />
       </View>
       <View style={styles.btnContainer}>
@@ -60,7 +66,7 @@ export default function Options() {
           style={styles.btn}
           mode='outlined'
           labelStyle={styles.btnText}
-          onPress={() => router.replace('/home')}
+          onPress={() => router.back()}
           rippleColor={'transparent'}
         >
           Cancel

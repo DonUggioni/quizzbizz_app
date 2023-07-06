@@ -24,7 +24,7 @@ export default function ProgressBar() {
         }
         dispatch({ type: 'NEXT_QUESTION' });
       }
-      const formattedTime = remainingTime.toFixed(3);
+      const formattedTime = remainingTime.toFixed(2);
       setTimerPercentage(((formattedTime / totalTimePerQuestion) * 1000) / 10);
     }, 20);
   }

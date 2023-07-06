@@ -1,15 +1,13 @@
+import { useState } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 
 import { Button } from 'react-native-paper';
 import { styles } from './selector.styles';
 import { COLORS } from '../../../constants';
-import { useState } from 'react';
 
-function capitalizeFirstChar(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
+import { capitalizeFirstChar } from '../../../utils/functions';
 
-export default function Selector({ title, data, onSelected }) {
+export default function Selector({ title, data, onSelected, currentValue }) {
   const [isActive, setIsActive] = useState(null);
 
   function selectHandler(item) {
@@ -22,7 +20,7 @@ export default function Selector({ title, data, onSelected }) {
       <View style={styles.textBox}>
         <Text style={styles.text}>{title}</Text>
         <Text style={styles.text}>
-          Current: <Text style={styles.highLight}>Any</Text>
+          Current: <Text style={styles.highLight}>{currentValue}</Text>
         </Text>
       </View>
       <ScrollView style={styles.btnContainer} horizontal={true}>

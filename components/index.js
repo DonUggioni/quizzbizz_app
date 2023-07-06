@@ -11,6 +11,7 @@ import ModalWindow from './modal/Modal';
 import LoadingScreen from './loadingScreen/LoadingScreen';
 import Options from './optionsScreen/Options';
 import SettingsHeader from './customHeaders/settingsHeader/SettingsHeader';
+import Auth from './auth/Auth';
 
 export {
   CustomHomeHeader,
@@ -26,4 +27,5 @@ export {
   LoadingScreen,
   Options,
   SettingsHeader,
+  Auth,
 };
