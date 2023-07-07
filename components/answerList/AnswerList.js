@@ -65,7 +65,7 @@ export default function QuestionList() {
       }
       setAnswerStyle('');
       dispatch({ type: 'NEXT_QUESTION' });
-    }, 1200);
+    }, 500);
   }
 
   return (

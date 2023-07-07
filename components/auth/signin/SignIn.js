@@ -3,18 +3,17 @@ import { View, Text } from 'react-native';
 
 import Input from '../textInput/TextInput';
 
-import { styles } from './signUp.styles';
+import { styles } from './signIn.styles';
 import SocialAuthButton from '../socialAuthButton/SocialAuthButton';
 import Divider from '../divider/Divider';
 
-export default function SignUp() {
+export default function SignIn() {
   const [inputValue, setInputValue] = useState('');
   const [hidePassword, setHidePassword] = useState(true);
-  const [hideConfirmPassword, setHideConfirmPassword] = useState(true);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Sign up</Text>
+      <Text style={styles.title}>Sign in</Text>
       <View style={styles.inputsContainer}>
         <Input
           label={'Email'}
@@ -31,21 +30,12 @@ export default function SignUp() {
           view={hidePassword}
           onPress={() => setHidePassword(!hidePassword)}
         />
-        <Input
-          label={'Confirm Password'}
-          onChangeText={(text) => setInputValue(text)}
-          inputValue={inputValue}
-          secureTextEntry={hideConfirmPassword}
-          icon={true}
-          view={hideConfirmPassword}
-          onPress={() => setHideConfirmPassword(!hideConfirmPassword)}
-        />
       </View>
       <Divider />
       <View style={styles.btnContainer}>
-        <SocialAuthButton logo={'google'} text={'Sign up with Google'} />
-        <SocialAuthButton logo={'facebook'} text={'Sign up with Facebook'} />
-        <SocialAuthButton logo={'apple'} text={'Sign up with Apple'} />
+        <SocialAuthButton logo={'google'} text={'Sign in with Google'} />
+        <SocialAuthButton logo={'facebook'} text={'Sign in with Facebook'} />
+        <SocialAuthButton logo={'apple'} text={'Sign in with Apple'} />
       </View>
     </View>
   );

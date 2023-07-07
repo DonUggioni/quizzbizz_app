@@ -59,7 +59,7 @@ export default function SubjectList() {
       category: activeSubject?.id,
     };
 
-    if (state.userPreferences?.difficulty !== null) {
+    if (state.userPreferences?.difficulty !== 'any') {
       params.difficulty = state?.userPreferences.difficulty;
     }
 

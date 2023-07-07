@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { Image, Pressable, View } from 'react-native';
 import { TextInput } from 'react-native';
 import { useState } from 'react';
 import Animated, {
@@ -9,9 +9,17 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import { styles } from './textInput.styles';
-import { COLORS, SIZES } from '../../../constants';
+import { COLORS, ICONS, SIZES } from '../../../constants';
 
-function Input({ onChangeText, label, inputValue, secureTextEntry }) {
+function Input({
+  onChangeText,
+  label,
+  inputValue,
+  secureTextEntry,
+  icon,
+  view,
+  onPress,
+}) {
   const [isFocused, setIsFocused] = useState(false);
 
   const labelPosition = useSharedValue(0);
@@ -56,6 +64,14 @@ function Input({ onChangeText, label, inputValue, secureTextEntry }) {
         autoCapitalize='none'
         secureTextEntry={secureTextEntry}
       />
+      {icon && (
+        <Pressable style={styles.imageContainer} onPress={onPress}>
+          <Image
+            source={!view ? ICONS.viewIcon : ICONS.hideIcon}
+            style={styles.img}
+          />
+        </Pressable>
+      )}
     </View>
   );
 }

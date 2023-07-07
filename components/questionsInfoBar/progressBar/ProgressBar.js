@@ -6,6 +6,8 @@ import { useAppContext } from '../../../context/context';
 
 import { useRouter } from 'expo-router';
 
+const TIME_PER_QUESTION = 30000;
+
 export default function ProgressBar() {
   const router = useRouter();
   const { state, dispatch } = useAppContext();
@@ -14,19 +16,24 @@ export default function ProgressBar() {
   let timeInterval;
 
   function timer() {
-    let totalTimePerQuestion = state.timerTime;
-    let remainingTime = totalTimePerQuestion;
+    const startTime = Date.now();
+    const totalTimePerQuestion = TIME_PER_QUESTION;
+
     timeInterval = setInterval(() => {
-      remainingTime -= 0.001 * totalTimePerQuestion;
+      const currentTime = Date.now();
+      const elapsedTime = currentTime - startTime;
+      const remainingTime = Math.max(totalTimePerQuestion - elapsedTime, 0);
+
       if (remainingTime <= 0) {
         if (state?.index + 1 === state.quizData?.results?.length) {
           router.replace('/finishStats');
         }
         dispatch({ type: 'NEXT_QUESTION' });
       }
-      const formattedTime = remainingTime.toFixed(2);
-      setTimerPercentage(((formattedTime / totalTimePerQuestion) * 1000) / 10);
-    }, 20);
+
+      const formattedTime = (remainingTime / totalTimePerQuestion) * 100;
+      setTimerPercentage(formattedTime);
+    }, 100);
   }
 
   useEffect(() => {

@@ -1,8 +1,14 @@
 import { View, Text, Image } from 'react-native';
 
 import { styles } from './settingsHeader.styles';
+import { ICONS } from '../../../constants';
+import HeaderIcon from '../../headerIcon/HeaderIcon';
+
+import { useRouter } from 'expo-router';
 
 export default function SsettingsHeader({ title, icon }) {
+  const router = useRouter();
+
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
@@ -11,6 +17,12 @@ export default function SsettingsHeader({ title, icon }) {
         </View>
         <Text style={styles.title}>{title}</Text>
       </View>
+      <HeaderIcon
+        source={ICONS.closeIcon}
+        btnHeight={20}
+        btnWidth={20}
+        onPress={() => router.back()}
+      />
     </View>
   );
 }

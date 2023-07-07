@@ -1,11 +1,24 @@
-import { View, Text } from 'react-native';
-import React from 'react';
+import { useState } from 'react';
+import { View } from 'react-native';
+
+import SignIn from './signin/SignIn';
 import SignUp from './signup/SignUp';
+import { Button } from 'react-native-paper';
+
+import { styles } from './auth.styles';
 
 export default function Auth() {
+  const [signin, setSignin] = useState(true);
   return (
     <View>
-      <SignUp />
+      {signin ? <SignIn /> : <SignUp />}
+      <Button
+        labelStyle={styles.btnText}
+        style={styles.btn}
+        onPress={() => setSignin(!signin)}
+      >
+        {signin ? "Don't have an account yet?" : 'Already have an account?'}
+      </Button>
     </View>
   );
 }

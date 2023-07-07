@@ -26,6 +26,11 @@ import menuIcon from '../assets/icons/menu-icon.png';
 import profileIcon from '../assets/icons/profile-icon.png';
 import closeIcon from '../assets/icons/close-icon.png';
 import settingsIcon from '../assets/icons/setting-icon.png';
+import hideIcon from '../assets/icons/hide-icon.png';
+import viewIcon from '../assets/icons/view-icon.png';
+import googleLogo from '../assets/icons/google-logo.png';
+import facebookLogo from '../assets/icons/facebook-logo.png';
+import appleLogo from '../assets/icons/apple-logo.png';
 
 export const ICONS = {
   'icon-9': icon9,
@@ -52,8 +57,13 @@ export const ICONS = {
   'icon-30': icon30,
   'icon-31': icon31,
   'icon-32': icon32,
+  'google-logo': googleLogo,
+  'facebook-logo': facebookLogo,
+  'apple-logo': appleLogo,
   profileIcon,
   menuIcon,
   closeIcon,
   settingsIcon,
+  hideIcon,
+  viewIcon,
 };

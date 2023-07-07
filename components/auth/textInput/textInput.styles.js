@@ -20,4 +20,13 @@ export const styles = StyleSheet.create({
     fontFamily: FONT.regular,
     letterSpacing: 0.5,
   },
+  imageContainer: {
+    position: 'absolute',
+    right: 12,
+    bottom: 6,
+  },
+  img: {
+    width: 30,
+    height: 30,
+  },
 });
