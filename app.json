@@ -1,6 +1,6 @@
 {
   "expo": {
-    "scheme": "acme",
+    "scheme": "quiz-me-app",
     "name": "Quiz Me",
     "slug": "quiz-me-app",
     "orientation": "portrait",
@@ -8,6 +8,18 @@
     "backgroundColor": "#001524",
     "web": {
       "bundler": "metro"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "4a795a70-c60e-46e4-8a6d-0d8e75469696"
+      }
+    },
+    "android": {
+      "package": "com.quizapp"
+    },
+    "ios": {
+      "bundleIdentifier": "com.quizapp",
+      "supportsTablet": true
     }
   }
 }

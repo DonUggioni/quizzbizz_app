@@ -39,6 +39,8 @@ const reducer = (state, action) => {
       return { ...state, userPreferences: action.payload };
     case 'SET_CURRENT_SUBJECT':
       return { ...state, currentSubject: action.payload };
+    case 'SET_USER':
+      return { ...state, user: action.payload };
 
     default:
       throw new Error(`Unhandled action type: ${action.type}`);

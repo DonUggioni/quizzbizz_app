@@ -19,6 +19,7 @@ const initialState = {
   error: false,
   modalVisible: false,
   correctAnswers: 0,
+  user: null,
 };
 
 function ContextProvider({ children }) {

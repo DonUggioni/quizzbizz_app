@@ -1,11 +1,16 @@
 import { View } from 'react-native';
-import { Auth, SettingsHeader } from '../../components';
+import { Auth, SettingsHeader, Profile } from '../../components';
 
-import { styles } from './auth.styles';
+import { styles } from './profile.styles';
 import { Stack } from 'expo-router';
 import { ICONS } from '../../constants';
 
+import { useAppContext } from '../../context/context';
+
 export default function index() {
+  const { state } = useAppContext();
+
+  console.log(state?.user);
   return (
     <View style={styles.container}>
       <Stack.Screen
@@ -17,7 +22,7 @@ export default function index() {
           },
         }}
       />
-      <Auth />
+      {state?.user !== null ? <Profile /> : <Auth />}
     </View>
   );
 }

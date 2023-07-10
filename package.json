@@ -1,19 +1,27 @@
 {
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "start": "expo start --dev-client",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "web": "expo start --web"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "1.17.11",
     "axios": "^1.4.0",
-    "expo": "^48.0.7",
+    "expo": "~48.0.18",
+    "expo-application": "~5.1.1",
+    "expo-auth-session": "~4.0.3",
     "expo-constants": "~14.2.1",
+    "expo-crypto": "~12.2.1",
+    "expo-dev-client": "~2.2.1",
     "expo-font": "^11.1.1",
     "expo-linking": "~4.0.1",
     "expo-router": "^1.2.0",
-    "expo-splash-screen": "~0.18.1",
+    "expo-splash-screen": "~0.18.2",
     "expo-status-bar": "~1.4.2",
+    "expo-system-ui": "^2.4.0",
+    "expo-web-browser": "~12.1.1",
+    "firebase": "^10.0.0",
     "he": "^1.2.0",
     "lottie-ios": "^3.4.0",
     "lottie-react-native": "5.1.4",
@@ -29,7 +37,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",
-    "@babel/plugin-proposal-export-namespace-from": "^7.18.9"
+    "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
+    "react-native-dotenv": "^3.4.9"
   },
   "resolutions": {
     "metro": "^0.73.7",

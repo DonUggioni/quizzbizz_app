@@ -6,7 +6,7 @@ import HeaderIcon from '../../headerIcon/HeaderIcon';
 
 import { useRouter } from 'expo-router';
 
-export default function SsettingsHeader({ title, icon }) {
+export default function SettingsHeader({ title, icon }) {
   const router = useRouter();
 
   return (

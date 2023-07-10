@@ -12,6 +12,7 @@ import LoadingScreen from './loadingScreen/LoadingScreen';
 import Options from './optionsScreen/Options';
 import SettingsHeader from './customHeaders/settingsHeader/SettingsHeader';
 import Auth from './auth/Auth';
+import Profile from './profile/Profile';
 
 export {
   CustomHomeHeader,
@@ -28,4 +29,5 @@ export {
   Options,
   SettingsHeader,
   Auth,
+  Profile,
 };
