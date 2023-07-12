@@ -19,7 +19,7 @@
     "expo-router": "^1.2.0",
     "expo-splash-screen": "~0.18.2",
     "expo-status-bar": "~1.4.2",
-    "expo-system-ui": "^2.4.0",
+    "expo-system-ui": "~2.2.1",
     "expo-web-browser": "~12.1.1",
     "firebase": "^10.0.0",
     "he": "^1.2.0",
