@@ -10,7 +10,6 @@ import { useAppContext } from '../../context/context';
 export default function index() {
   const { state } = useAppContext();
 
-  console.log(state?.user);
   return (
     <View style={styles.container}>
       <Stack.Screen

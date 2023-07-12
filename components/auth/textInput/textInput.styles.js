@@ -1,6 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { COLORS, FONT, MARGIN, PADDING, SIZES } from '../../../constants';
-import { color } from 'react-native-reanimated';
+import { COLORS, FONT, MARGIN, SIZES } from '../../../constants';
 
 export const styles = StyleSheet.create({
   container: {

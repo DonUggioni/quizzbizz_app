@@ -17,6 +17,7 @@ const reducer = (state, action) => {
         index: 0,
         correctAnswers: 0,
         modalVisible: false,
+        quizData: [],
       };
     case 'SHOW_MODAL':
       return { ...state, modalVisible: true };
@@ -30,6 +31,7 @@ const reducer = (state, action) => {
         correctAnswers: 0,
         points: 0,
         index: 0,
+        quizData: [],
       };
     case 'SHOW_LOADING_SCREEN':
       return { ...state, isLoading: true };
@@ -41,6 +43,15 @@ const reducer = (state, action) => {
       return { ...state, currentSubject: action.payload };
     case 'SET_USER':
       return { ...state, user: action.payload };
+    case 'SET_USER_INFO':
+      return {
+        ...state,
+        userPreferences: action.payload.userPreferences,
+        totalPoints: action.payload.totalPoints,
+        correctAnswers: action.payload.correctAnswers,
+        wrongAnswers: action.payload.wrongAnswers,
+        gamesPlayed: action.payload.gamesPlayed,
+      };
 
     default:
       throw new Error(`Unhandled action type: ${action.type}`);

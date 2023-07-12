@@ -7,6 +7,7 @@ const DEFAULT_NUM_OF_QUESTIONS = 15;
 
 const initialState = {
   quizData: [],
+  user: null,
   userPreferences: {
     difficulty: 'any',
     numOfQuestions: DEFAULT_NUM_OF_QUESTIONS,
@@ -19,7 +20,8 @@ const initialState = {
   error: false,
   modalVisible: false,
   correctAnswers: 0,
-  user: null,
+  wrongAnswers: 0,
+  gamesPlayed: 0,
 };
 
 function ContextProvider({ children }) {

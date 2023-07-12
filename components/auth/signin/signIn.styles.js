@@ -18,4 +18,12 @@ export const styles = StyleSheet.create({
   btnContainer: {
     gap: MARGIN.medium,
   },
+  signBtnContainer: {
+    padding: PADDING.medium,
+    backgroundColor: COLORS.primary,
+    position: 'absolute',
+    width: '100%',
+    bottom: -24,
+    zIndex: 100,
+  },
 });

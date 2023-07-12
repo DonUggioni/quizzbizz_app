@@ -43,10 +43,22 @@ function capitalizeFirstChar(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
+// This function is calculating the average percentage of correct answers
+function calculateAveragePercentage(correctAnswers, wrongAnswers) {
+  if (correctAnswers === 0 && wrongAnswers === 0) return 0;
+
+  const totalQuestions = Number(correctAnswers) + Number(wrongAnswers);
+  const averageCorrect = (Number(correctAnswers) / totalQuestions) * 100;
+
+  return averageCorrect.toFixed(1);
+}
+
+console.log(calculateAveragePercentage(0, 0));
 export {
   removeGeneralCategory,
   shuffleArray,
   getData,
   calculatePercentage,
   capitalizeFirstChar,
+  calculateAveragePercentage,
 };

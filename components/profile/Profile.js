@@ -6,10 +6,19 @@ import { useAppContext } from '../../context/context';
 import { Button } from 'react-native-paper';
 
 import { auth } from '../../firebase/config';
-import { signOut } from 'firebase/auth';
+import { signOut, deleteUser } from 'firebase/auth';
+
+import { useRouter } from 'expo-router';
+import { calculateAveragePercentage } from '../../utils/functions';
 
 export default function Profile() {
+  const router = useRouter();
   const { state, dispatch } = useAppContext();
+
+  const averageOfCorrectAnswers = calculateAveragePercentage(
+    state?.correctAnswers,
+    state?.wrongAnswers
+  );
 
   async function signOutHandler() {
     try {
@@ -17,6 +26,19 @@ export default function Profile() {
       dispatch({ type: 'SET_USER', payload: null });
     } catch (error) {
       console.log(error);
+    } finally {
+      router.replace('/home');
+    }
+  }
+
+  async function deleteUserHandler() {
+    try {
+      deleteUser(auth.currentUser);
+      dispatch({ type: 'SET_USER', payload: null });
+    } catch (error) {
+      console.log(error.message);
+    } finally {
+      router.replace('/home');
     }
   }
 
@@ -25,11 +47,13 @@ export default function Profile() {
       <View>
         <Text style={styles.text}>Username: {state?.user.displayName}</Text>
         <Text style={styles.text}>Email: {state?.user.email}</Text>
-        <Text style={styles.text}>Games played: 20</Text>
-        <Text style={styles.text}>Correct answers: 20</Text>
-        <Text style={styles.text}>Wrong answers: 30</Text>
+        <Text style={styles.text}>Games played: {state?.gamesPlayed}</Text>
         <Text style={styles.text}>
-          Average of correct answers per game: 50%
+          Correct answers: {state?.correctAnswers}
+        </Text>
+        <Text style={styles.text}>Wrong answers: {state?.wrongAnswers}</Text>
+        <Text style={styles.text}>
+          Average of correct answers per game: {averageOfCorrectAnswers}%
         </Text>
       </View>
 
@@ -42,7 +66,11 @@ export default function Profile() {
         >
           Sign out
         </Button>
-        <Button labelStyle={styles.btnLabel} rippleColor={undefined}>
+        <Button
+          labelStyle={styles.btnLabel}
+          rippleColor={undefined}
+          onPress={() => deleteUserHandler()}
+        >
           Delete Account
         </Button>
       </View>
