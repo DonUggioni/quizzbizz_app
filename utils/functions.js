@@ -53,7 +53,15 @@ function calculateAveragePercentage(correctAnswers, wrongAnswers) {
   return averageCorrect.toFixed(1);
 }
 
-console.log(calculateAveragePercentage(0, 0));
+// This function is being used to generate a random username upon sign up.
+function generateRandomUsername() {
+  const prefix = 'Quizer';
+  const randomNumber = Math.floor(Math.random() * 1000000);
+  const randomString = randomNumber.toString().padStart(6, '0');
+  const result = prefix + randomString;
+  return result;
+}
+
 export {
   removeGeneralCategory,
   shuffleArray,
@@ -61,4 +69,5 @@ export {
   calculatePercentage,
   capitalizeFirstChar,
   calculateAveragePercentage,
+  generateRandomUsername,
 };

@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import { View } from 'react-native';
 import { Stack } from 'expo-router';
 
@@ -7,29 +5,12 @@ import { COLORS } from '../constants';
 import { CustomHomeHeader, SubjectList } from '../components';
 import { PaperProvider } from 'react-native-paper';
 
-import { useAppContext } from '../context/context';
-
-import { auth } from '../firebase/config';
+import { StatusBar } from 'expo-status-bar';
 
 export default function Home() {
-  const { dispatch } = useAppContext();
-
-  function getCurrentUser() {
-    const user = auth.currentUser;
-
-    if (user) {
-      dispatch({ type: 'SET_USER', payload: user });
-    } else {
-      console.log('no user');
-    }
-  }
-
-  useEffect(() => {
-    getCurrentUser();
-  }, []);
-
   return (
     <PaperProvider>
+      <StatusBar style='light' />
       <View
         style={{
           flex: 1,
@@ -44,7 +25,6 @@ export default function Home() {
             },
           }}
         />
-
         <SubjectList />
       </View>
     </PaperProvider>

@@ -10,12 +10,21 @@ const reducer = (state, action) => {
       return { ...state, index: state.index + 1 };
     case 'ADD_POINTS':
       return { ...state, points: state.points + action.payload };
+    case 'UPDATE_GAME_STATS':
+      return {
+        ...state,
+        totalPoints: state.totalPoints + state.points,
+        gamesPlayed: state.gamesPlayed + 1,
+        totalCorrectAnswers: state.totalCorrectAnswers + state.correctAnswers,
+        totalWrongAnswers: state.totalWrongAnswers + state.wrongAnswers,
+      };
     case 'CANCEL_QUIZ':
       return {
         ...state,
         points: 0,
         index: 0,
         correctAnswers: 0,
+        wrongAnswers: 0,
         modalVisible: false,
         quizData: [],
       };
@@ -25,10 +34,13 @@ const reducer = (state, action) => {
       return { ...state, modalVisible: false };
     case 'ADD_CORRECT_ANSWER':
       return { ...state, correctAnswers: state.correctAnswers + 1 };
+    case 'ADD_WRONG_ANSWER':
+      return { ...state, wrongAnswers: state.wrongAnswers + 1 };
     case 'RESTART':
       return {
         ...state,
         correctAnswers: 0,
+        wrongAnswers: 0,
         points: 0,
         index: 0,
         quizData: [],
@@ -48,8 +60,8 @@ const reducer = (state, action) => {
         ...state,
         userPreferences: action.payload.userPreferences,
         totalPoints: action.payload.totalPoints,
-        correctAnswers: action.payload.correctAnswers,
-        wrongAnswers: action.payload.wrongAnswers,
+        totalCorrectAnswers: action.payload.totalCorrectAnswers,
+        totalWrongAnswers: action.payload.totalWrongAnswers,
         gamesPlayed: action.payload.gamesPlayed,
       };
 

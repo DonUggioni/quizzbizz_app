@@ -16,8 +16,8 @@ export default function Profile() {
   const { state, dispatch } = useAppContext();
 
   const averageOfCorrectAnswers = calculateAveragePercentage(
-    state?.correctAnswers,
-    state?.wrongAnswers
+    state?.totalCorrectAnswers,
+    state?.totalWrongAnswers
   );
 
   async function signOutHandler() {
@@ -49,11 +49,13 @@ export default function Profile() {
         <Text style={styles.text}>Email: {state?.user.email}</Text>
         <Text style={styles.text}>Games played: {state?.gamesPlayed}</Text>
         <Text style={styles.text}>
-          Correct answers: {state?.correctAnswers}
+          Correct answers: {state?.totalCorrectAnswers}
         </Text>
-        <Text style={styles.text}>Wrong answers: {state?.wrongAnswers}</Text>
         <Text style={styles.text}>
-          Average of correct answers per game: {averageOfCorrectAnswers}%
+          Wrong answers: {state?.totalWrongAnswers}
+        </Text>
+        <Text style={styles.text}>
+          Average of correct answers: {averageOfCorrectAnswers}%
         </Text>
       </View>
 

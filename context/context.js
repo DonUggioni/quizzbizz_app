@@ -22,6 +22,8 @@ const initialState = {
   correctAnswers: 0,
   wrongAnswers: 0,
   gamesPlayed: 0,
+  totalCorrectAnswers: 0,
+  totalWrongAnswers: 0,
 };
 
 function ContextProvider({ children }) {

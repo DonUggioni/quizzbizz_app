@@ -4,6 +4,9 @@ import { Button } from 'react-native-paper';
 
 import Selector from './selector/Selector';
 
+import { doc, setDoc } from 'firebase/firestore';
+import { db } from '../../firebase/config';
+
 import { styles } from './options.styles';
 import { COLORS } from '../../constants';
 import {
@@ -23,6 +26,7 @@ export default function Options() {
     difficulty: null,
     numOfQuestions: state?.userPreferences.numOfQuestions,
   });
+  const [isSaving, setIsSaving] = useState(false);
 
   // This function is recieving the data coming from the "Selector" component, this way, you can updated the app state from here by pressing the Save button and dispatching an action
   function onSelect(data) {
@@ -37,9 +41,24 @@ export default function Options() {
     }
   }
 
-  function saveHandler() {
+  async function saveHandler() {
+    setIsSaving(true);
     dispatch({ type: 'UPDATE_USER_PREFERENCES', payload: userSettings });
-    router.back();
+
+    try {
+      await setDoc(
+        doc(db, state?.user.uid, state?.user.email),
+        {
+          userPreferences: userSettings,
+        },
+        { merge: true }
+      );
+    } catch (error) {
+      console.log(error.message);
+    } finally {
+      setIsSaving(false);
+      router.back();
+    }
   }
 
   return (
@@ -78,6 +97,7 @@ export default function Options() {
           labelStyle={styles.btnText}
           rippleColor={'transparent'}
           onPress={() => saveHandler()}
+          loading={isSaving}
         >
           Save
         </Button>
