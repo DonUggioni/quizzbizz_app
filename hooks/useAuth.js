@@ -102,9 +102,8 @@ function useAuth() {
   }, [response]);
 
   useEffect(() => {
+    dispatch({ type: 'SHOW_LOADING_SCREEN' });
     const unsub = onAuthStateChanged(auth, async (user) => {
-      dispatch({ type: 'SHOW_LOADING_SCREEN' });
-
       if (user) {
         const docRef = doc(db, user.uid, user.email);
         const docSnap = await getDoc(docRef);
@@ -152,7 +151,7 @@ function useAuth() {
         dispatch({ type: 'HIDE_LOADING_SCREEN' });
       } else {
         console.log('No user');
-        // dispatch({ type: 'HIDE_LOADING_SCREEN' });
+        dispatch({ type: 'HIDE_LOADING_SCREEN' });
       }
     });
     dispatch({ type: 'HIDE_LOADING_SCREEN' });

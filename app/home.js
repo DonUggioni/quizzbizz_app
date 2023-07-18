@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { View } from 'react-native';
 import { Stack } from 'expo-router';
 
@@ -7,7 +8,20 @@ import { PaperProvider } from 'react-native-paper';
 
 import { StatusBar } from 'expo-status-bar';
 
+import { useAppContext } from '../context/context';
+
+import useGetTotalPoints from '../hooks/useGetTotalPoints';
+
 export default function Home() {
+  const { state } = useAppContext();
+  const { userCredentials } = useGetTotalPoints();
+
+  useEffect(() => {
+    if (state?.totalPoints > 0) return console.log('returned');
+
+    userCredentials();
+  }, []);
+
   return (
     <PaperProvider>
       <StatusBar style='light' />

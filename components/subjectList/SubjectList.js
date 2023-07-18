@@ -16,8 +16,6 @@ import LoadingScreen from '../loadingScreen/LoadingScreen';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import PointsDisplay from '../pointsDisplay/PointsDisplay';
 
-import useFetchUserData from '../../hooks/useFetchUserData';
-
 export default function SubjectList() {
   const router = useRouter();
   const { dispatch, state } = useAppContext();

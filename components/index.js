@@ -13,6 +13,7 @@ import Options from './optionsScreen/Options';
 import SettingsHeader from './customHeaders/settingsHeader/SettingsHeader';
 import Auth from './auth/Auth';
 import Profile from './profile/Profile';
+import LoadingSpinner from './loadingSpinner/LoadingSpinner';
 
 export {
   CustomHomeHeader,
@@ -30,4 +31,5 @@ export {
   SettingsHeader,
   Auth,
   Profile,
+  LoadingSpinner,
 };

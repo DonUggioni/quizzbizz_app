@@ -23,7 +23,7 @@ export default function Profile() {
   async function signOutHandler() {
     try {
       signOut(auth);
-      dispatch({ type: 'SET_USER', payload: null });
+      dispatch({ type: 'SIGN_OUT' });
     } catch (error) {
       console.log(error);
     } finally {

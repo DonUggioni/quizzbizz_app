@@ -64,6 +64,8 @@ const reducer = (state, action) => {
         totalWrongAnswers: action.payload.totalWrongAnswers,
         gamesPlayed: action.payload.gamesPlayed,
       };
+    case 'SIGN_OUT':
+      return { ...state, user: null, totalPoints: 0 };
 
     default:
       throw new Error(`Unhandled action type: ${action.type}`);

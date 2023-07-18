@@ -70,7 +70,7 @@ export default function QuestionList() {
         dispatch({ type: 'UPDATE_GAME_STATS' });
 
         setTimeout(async () => {
-          if (!state?.user.uid) return;
+          if (state?.user === null) return;
           try {
             await setDoc(
               doc(db, state?.user.uid, state?.user.email),

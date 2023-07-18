@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Text } from 'react-native';
 
 import Animated, { Easing, SlideInUp } from 'react-native-reanimated';
@@ -8,6 +9,7 @@ import { useAppContext } from '../../context/context';
 
 export default function PointsDisplay() {
   const { state } = useAppContext();
+
   return (
     <Animated.View
       style={styles.container}
@@ -16,7 +18,7 @@ export default function PointsDisplay() {
       )}
     >
       <Text style={styles.heading}>Total points</Text>
-      <Text style={styles.points}>{state.totalPoints}</Text>
+      <Text style={styles.points}>{state?.totalPoints}</Text>
     </Animated.View>
   );
 }
