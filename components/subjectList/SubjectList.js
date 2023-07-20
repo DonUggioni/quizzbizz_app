@@ -100,7 +100,7 @@ export default function SubjectList() {
 
   return (
     <View style={styles.container}>
-      <PointsDisplay />
+      {state.user !== null && <PointsDisplay />}
       <Text style={styles.heading}>Pick a subject</Text>
       <FlatList
         data={state.quizData.trivia_categories}

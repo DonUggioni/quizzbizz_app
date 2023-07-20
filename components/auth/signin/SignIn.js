@@ -10,10 +10,8 @@ import Divider from '../divider/Divider';
 
 import useAuth from '../../../hooks/useAuth';
 import ActionButton from '../../actionButton/ActionButton';
-import { useAppContext } from '../../../context/context';
 
 export default function SignIn() {
-  const { state } = useAppContext();
   const { promptAsync, signinUser } = useAuth();
   const [hidePassword, setHidePassword] = useState(true);
   const [inputValues, setInputValues] = useState({

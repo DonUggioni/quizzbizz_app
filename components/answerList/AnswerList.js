@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { View } from 'react-native';
 import he from 'he';
 import { useRouter } from 'expo-router';
@@ -64,33 +64,48 @@ export default function QuestionList() {
     } else {
       dispatch({ type: 'ADD_WRONG_ANSWER' });
     }
+
     setTimeout(() => {
       if (state?.index + 1 === state.quizData.results?.length) {
-        router.replace('/finishStats');
         dispatch({ type: 'UPDATE_GAME_STATS' });
 
-        setTimeout(async () => {
-          if (state?.user === null) return;
-          try {
-            await setDoc(
-              doc(db, state?.user.uid, state?.user.email),
-              {
-                gamesPlayed: state?.gamesPlayed,
-                totalCorrectAnswers: state?.totalCorrectAnswers,
-                totalWrongAnswers: state?.totalWrongAnswers,
-                totalPoints: state?.totalPoints,
-              },
-              { merge: true }
-            );
-          } catch (error) {
-            console.log(error.message);
-          }
-        }, 1000);
+        router.replace('/finishStats');
       }
       setAnswerStyle('');
       dispatch({ type: 'NEXT_QUESTION' });
     }, 500);
   }
+
+  // Using useMemo here to memoize the state and avoid unnecessary triggering of the useEffect that will update the stats to firebase whenever the firebaseState is updated. This also ensures that the latest state is updated to firebase.
+  const firebaseState = useMemo(
+    () => ({
+      gamesPlayed: state?.gamesPlayed,
+      totalPoints: state?.totalPoints,
+      totalCorrectAnswers: state.totalCorrectAnswers,
+      totalWrongAnswers: state.totalWrongAnswers,
+    }),
+    [state]
+  );
+
+  useEffect(() => {
+    if (state?.user === null) return;
+
+    async function updateStatsToFirebase() {
+      try {
+        await setDoc(
+          doc(db, state?.user.uid, state?.user.email),
+
+          firebaseState,
+
+          { merge: true }
+        );
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+
+    updateStatsToFirebase();
+  }, [firebaseState]);
 
   return (
     <View style={styles.container}>

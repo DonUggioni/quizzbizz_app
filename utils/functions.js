@@ -19,7 +19,7 @@ function shuffleArray(array) {
   return array;
 }
 
-// This function get the data from the Database
+// This function get the data from the open trivia Database
 async function getData(endpoint, params) {
   try {
     const response = await axios.get(`https://opentdb.com/${endpoint}`, {

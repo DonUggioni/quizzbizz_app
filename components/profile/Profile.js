@@ -11,6 +11,8 @@ import { signOut, deleteUser } from 'firebase/auth';
 import { useRouter } from 'expo-router';
 import { calculateAveragePercentage } from '../../utils/functions';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 export default function Profile() {
   const router = useRouter();
   const { state, dispatch } = useAppContext();
@@ -23,6 +25,7 @@ export default function Profile() {
   async function signOutHandler() {
     try {
       signOut(auth);
+      await AsyncStorage.removeItem('@QuizMeData');
       dispatch({ type: 'SIGN_OUT' });
     } catch (error) {
       console.log(error);
@@ -34,7 +37,8 @@ export default function Profile() {
   async function deleteUserHandler() {
     try {
       deleteUser(auth.currentUser);
-      dispatch({ type: 'SET_USER', payload: null });
+      await AsyncStorage.removeItem('@QuizMeData');
+      dispatch({ type: 'SIGN_OUT' });
     } catch (error) {
       console.log(error.message);
     } finally {

@@ -10,15 +10,10 @@ import SocialAuthButton from '../socialAuthButton/SocialAuthButton';
 import Divider from '../divider/Divider';
 import ActionButton from '../../actionButton/ActionButton';
 
-import * as WebBrowser from 'expo-web-browser';
-
 import useAuth from '../../../hooks/useAuth';
-
-WebBrowser.maybeCompleteAuthSession();
 
 export default function SignUp() {
   const { promptAsync, createUser } = useAuth();
-
   const [inputValues, setInputValues] = useState({
     email: '',
     password: '',

@@ -22,4 +22,9 @@ export const styles = StyleSheet.create({
     fontFamily: FONT.regular,
     letterSpacing: 0.5,
   },
+  messageContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });

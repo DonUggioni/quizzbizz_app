@@ -18,4 +18,7 @@ export const styles = StyleSheet.create({
     color: COLORS.white,
     letterSpacing: 0.5,
   },
+  pressed: {
+    opacity: 0.8,
+  },
 });

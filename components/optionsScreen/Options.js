@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 import { Button } from 'react-native-paper';
 
 import Selector from './selector/Selector';
@@ -23,7 +23,7 @@ export default function Options() {
   const router = useRouter();
   const { state, dispatch } = useAppContext();
   const [userSettings, setUserSettings] = useState({
-    difficulty: null,
+    difficulty: state?.userPreferences.difficulty,
     numOfQuestions: state?.userPreferences.numOfQuestions,
   });
   const [isSaving, setIsSaving] = useState(false);
@@ -59,6 +59,16 @@ export default function Options() {
       setIsSaving(false);
       router.back();
     }
+  }
+
+  if (state.user === null) {
+    return (
+      <View style={styles.messageContainer}>
+        <Text style={styles.btnText}>
+          Must be logged in to change the settings.
+        </Text>
+      </View>
+    );
   }
 
   return (
