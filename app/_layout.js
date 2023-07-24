@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import { Stack } from 'expo-router';
 import { useFonts } from 'expo-font';
 import ContextProvider from '../context/context';

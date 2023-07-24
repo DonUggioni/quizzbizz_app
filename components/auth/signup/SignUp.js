@@ -12,8 +12,12 @@ import ActionButton from '../../actionButton/ActionButton';
 
 import useAuth from '../../../hooks/useAuth';
 
+import * as WebBrowser from 'expo-web-browser';
+
+WebBrowser.maybeCompleteAuthSession();
+
 export default function SignUp() {
-  const { promptAsync, createUser } = useAuth();
+  const { googlePromptAsync, createUser } = useAuth();
   const [inputValues, setInputValues] = useState({
     email: '',
     password: '',
@@ -38,10 +42,14 @@ export default function SignUp() {
           <SocialAuthButton
             logo={'google'}
             text={'Sign up with Google'}
-            onPress={() => promptAsync()}
+            onPress={() => googlePromptAsync()}
           />
-          <SocialAuthButton logo={'facebook'} text={'Sign up with Facebook'} />
-          <SocialAuthButton logo={'apple'} text={'Sign up with Apple'} />
+          {/* <SocialAuthButton
+            logo={'facebook'}
+            text={'Sign up with Facebook'}
+            onPress={() => facebookPromptAsync()}
+          />
+          <SocialAuthButton logo={'apple'} text={'Sign up with Apple'} /> */}
         </>
       );
     }

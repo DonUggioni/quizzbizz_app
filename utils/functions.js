@@ -19,7 +19,7 @@ function shuffleArray(array) {
   return array;
 }
 
-// This function get the data from the open trivia Database
+// This function gets the data from the open trivia Database
 async function getData(endpoint, params) {
   try {
     const response = await axios.get(`https://opentdb.com/${endpoint}`, {
@@ -62,6 +62,24 @@ function generateRandomUsername() {
   return result;
 }
 
+// A funtion to 'translate' some of the error that might come from firebase during authentication
+function translateFirebaseError(err) {
+  switch (err) {
+    case 'Firebase: Error (auth/invalid-email).':
+      return 'Invalid email address.';
+    case 'Firebase: Error (auth/wrong-password).':
+      return 'Invalid password.';
+    case 'Firebase: Error (auth/user-not-found).':
+      return 'User not found.';
+    case 'Firebase: Error (auth/email-already-exists).':
+      return 'The provided email is already in use by an existing user.';
+    case 'Firebase: Error (auth/missing-password).':
+      return 'Password cannot be empty.';
+    default:
+      return 'Check your credentials and try again.';
+  }
+}
+
 export {
   removeGeneralCategory,
   shuffleArray,
@@ -70,4 +88,5 @@ export {
   capitalizeFirstChar,
   calculateAveragePercentage,
   generateRandomUsername,
+  translateFirebaseError,
 };

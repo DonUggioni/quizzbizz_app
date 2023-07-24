@@ -11,8 +11,12 @@ import Divider from '../divider/Divider';
 import useAuth from '../../../hooks/useAuth';
 import ActionButton from '../../actionButton/ActionButton';
 
+import * as WebBrowser from 'expo-web-browser';
+
+WebBrowser.maybeCompleteAuthSession();
+
 export default function SignIn() {
-  const { promptAsync, signinUser } = useAuth();
+  const { googlePromptAsync, signinUser } = useAuth();
   const [hidePassword, setHidePassword] = useState(true);
   const [inputValues, setInputValues] = useState({
     email: '',
@@ -35,10 +39,14 @@ export default function SignIn() {
           <SocialAuthButton
             logo={'google'}
             text={'Sign in with Google'}
-            onPress={() => promptAsync()}
+            onPress={() => googlePromptAsync()}
           />
-          <SocialAuthButton logo={'facebook'} text={'Sign in with Facebook'} />
-          <SocialAuthButton logo={'apple'} text={'Sign in with Apple'} />
+          {/* <SocialAuthButton
+            logo={'facebook'}
+            text={'Sign in with Facebook'}
+            onPress={() => facebookPromptAsync()}
+          />
+          <SocialAuthButton logo={'apple'} text={'Sign in with Apple'} /> */}
         </>
       );
     }

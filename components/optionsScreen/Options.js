@@ -76,7 +76,7 @@ export default function Options() {
       <View>
         <Selector
           data={DIFFICULTY_OPTIONS}
-          title={'Select a default difficulty level'}
+          title={'Select a default question difficulty level'}
           onSelected={onSelect}
           currentValue={
             state?.userPreferences.difficulty !== null &&

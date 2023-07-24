@@ -3,7 +3,11 @@ const reducer = (state, action) => {
     case 'FETCH_DATA_SUCCESS':
       return { ...state, quizData: action.payload };
     case 'FETCH_DATA_ERROR':
-      return { ...state, isLoading: false, error: true };
+      return {
+        ...state,
+        isLoading: false,
+        error: { ...state.error, error: true },
+      };
     case 'CURRENT_SUBJECT':
       return { ...state, currentSubject: action.payload };
     case 'NEXT_QUESTION':
@@ -31,7 +35,10 @@ const reducer = (state, action) => {
     case 'SHOW_MODAL':
       return { ...state, modalVisible: true };
     case 'HIDE_MODAL':
-      return { ...state, modalVisible: false };
+      return {
+        ...state,
+        modalVisible: false,
+      };
     case 'ADD_CORRECT_ANSWER':
       return { ...state, correctAnswers: state.correctAnswers + 1 };
     case 'ADD_WRONG_ANSWER':
@@ -66,6 +73,18 @@ const reducer = (state, action) => {
       };
     case 'SIGN_OUT':
       return { ...state, user: null, totalPoints: 0 };
+    case 'SHOW_ERROR':
+      return {
+        ...state,
+        error: { ...state.error, message: action.payload },
+        modalVisible: true,
+      };
+    case 'HIDE_ERROR':
+      return {
+        ...state,
+        error: { ...state.error, message: '' },
+        modalVisible: false,
+      };
 
     default:
       throw new Error(`Unhandled action type: ${action.type}`);

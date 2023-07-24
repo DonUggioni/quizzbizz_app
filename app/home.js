@@ -34,7 +34,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    if (state.user !== null) return;
+    if (state?.user !== null) return;
 
     const unsub = onAuthStateChanged(auth, async (user) => {
       if (user) {
@@ -45,7 +45,6 @@ export default function Home() {
           email: user.email,
         };
 
-        console.log('useAuth useEffect');
         dispatch({ type: 'SET_USER', payload: user });
 
         // Storing basic user info in local storage to retrieve on reload
@@ -71,7 +70,6 @@ export default function Home() {
         // Checking if user info exists on DB, if not, it will be created.
         if (docSnap.exists()) {
           const data = docSnap.data();
-          console.log(data);
           dispatch({
             type: 'SET_USER_INFO',
             payload: data,
@@ -86,7 +84,7 @@ export default function Home() {
     });
 
     return () => unsub();
-  }, []);
+  }, [state.user]);
 
   return (
     <PaperProvider>

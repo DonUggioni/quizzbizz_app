@@ -24,25 +24,24 @@ export default function Profile() {
 
   async function signOutHandler() {
     try {
-      signOut(auth);
+      await signOut(auth);
       await AsyncStorage.removeItem('@QuizMeData');
+      router.replace('/home');
       dispatch({ type: 'SIGN_OUT' });
+      dispatch({ type: 'RESTART' });
     } catch (error) {
       console.log(error);
-    } finally {
-      router.replace('/home');
     }
   }
 
   async function deleteUserHandler() {
     try {
-      deleteUser(auth.currentUser);
+      await deleteUser(auth.currentUser);
       await AsyncStorage.removeItem('@QuizMeData');
+      router.replace('/home');
       dispatch({ type: 'SIGN_OUT' });
     } catch (error) {
       console.log(error.message);
-    } finally {
-      router.replace('/home');
     }
   }
 

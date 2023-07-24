@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import {
   GoogleAuthProvider,
@@ -8,13 +8,13 @@ import {
 } from 'firebase/auth';
 import * as Google from 'expo-auth-session/providers/google';
 
-import { makeRedirectUri } from 'expo-auth-session';
 import { IOS_CLIENT_ID, ANDROID_CLIENT_ID } from '@env';
-import { useAppContext } from '../context/context';
 
 import { auth } from '../firebase/config';
 
 import { useRouter } from 'expo-router';
+
+import { useAppContext } from '../context/context';
 
 function useAuth() {
   const { state, dispatch } = useAppContext();
@@ -24,21 +24,31 @@ function useAuth() {
     errorMessage: '',
   });
 
-  const [request, response, promptAsync] = Google.useAuthRequest({
+  const [_, googleResponse, googlePromptAsync] = Google.useAuthRequest({
     iosClientId: IOS_CLIENT_ID,
     androidClientId: ANDROID_CLIENT_ID,
-    redirectUri: makeRedirectUri({ scheme: 'com.quizapp' }),
   });
 
-  console.log(response);
+  // const [request, facebookResponse, facebookPromptAsync] =
+  //   Facebook.useAuthRequest({
+  //     clientId: FACEBOOK_CLIENT_ID,
+  //   });
 
   useEffect(() => {
-    if (response?.type === 'success') {
-      const { id_token } = response.params;
+    if (googleResponse?.type === 'success') {
+      const { id_token } = googleResponse.params;
       const credential = GoogleAuthProvider.credential(id_token);
       signInWithCredential(auth, credential);
     }
-  }, [response]);
+  }, [googleResponse]);
+
+  // useEffect(() => {
+  //   if (facebookResponse?.type === 'success') {
+  //     const { id_token } = facebookResponse.params;
+  //     const credential = FacebookAuthProvider.credential(id_token);
+  //     signInWithCredential(auth, credential);
+  //   }
+  // }, [facebookResponse]);
 
   const createUser = async (email, password) => {
     try {
@@ -47,7 +57,8 @@ function useAuth() {
       router.replace('/home');
     } catch (error) {
       console.log('error:', error.message);
-      setError({ ...error, hasError: true, errorMessage: error.message });
+      // setError({ ...error, hasError: true, errorMessage: error.message });
+      dispatch({ type: 'SHOW_ERROR', payload: error.message });
     }
   };
 
@@ -56,14 +67,20 @@ function useAuth() {
       await signInWithEmailAndPassword(auth, email, password);
       console.log('user signedin');
       router.replace('/home');
-      dispatch({ type: 'SET_USER', payload: user });
     } catch (error) {
       console.log('error:', error.message);
-      setError({ ...error, hasError: true, errorMessage: error.message });
+      // setError({ ...error, hasError: true, errorMessage: error.message });
+      // dispatch({type: 'SHOW_ERROR', payload:})
+      dispatch({ type: 'SHOW_ERROR', payload: error.message });
     }
   };
 
-  return { promptAsync, error, createUser, signinUser };
+  return {
+    googlePromptAsync,
+    error,
+    createUser,
+    signinUser,
+  };
 }
 
 export default useAuth;

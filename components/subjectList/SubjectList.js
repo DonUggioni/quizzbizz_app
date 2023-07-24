@@ -3,7 +3,7 @@ import { View, Text, FlatList } from 'react-native';
 
 import { useRouter } from 'expo-router';
 
-import { ICONS } from '../../constants';
+import { ICONS, MARGIN } from '../../constants';
 import { styles } from './subjectList.styles';
 import SubjectCard from '../cards/subjectCard/SubjectCard';
 import ActionButton from '../actionButton/ActionButton';
@@ -34,7 +34,9 @@ export default function SubjectList() {
       }, 2000);
     } catch (error) {
       console.log(error);
-      dispatch({ type: 'FETCH_DATA_ERROR' });
+      dispatch({
+        type: 'FETCH_DATA_ERROR',
+      });
     }
   }
 
@@ -84,7 +86,7 @@ export default function SubjectList() {
     );
   }
 
-  if (state.error) {
+  if (state.error.error) {
     return (
       <View
         style={[
@@ -101,7 +103,14 @@ export default function SubjectList() {
   return (
     <View style={styles.container}>
       {state.user !== null && <PointsDisplay />}
-      <Text style={styles.heading}>Pick a subject</Text>
+      <Text
+        style={[
+          styles.heading,
+          { marginTop: state.user === null ? MARGIN.xLarge : null },
+        ]}
+      >
+        Pick a subject
+      </Text>
       <FlatList
         data={state.quizData.trivia_categories}
         showsVerticalScrollIndicator={false}

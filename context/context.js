@@ -17,7 +17,10 @@ const initialState = {
   totalPoints: 0,
   index: 0,
   isLoading: false,
-  error: false,
+  error: {
+    error: false,
+    message: '',
+  },
   modalVisible: false,
   correctAnswers: 0,
   wrongAnswers: 0,

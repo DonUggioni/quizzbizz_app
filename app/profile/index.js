@@ -4,6 +4,7 @@ import {
   SettingsHeader,
   Profile,
   LoadingSpinner,
+  MessageModal,
 } from '../../components';
 
 import { styles } from './profile.styles';
@@ -11,10 +12,7 @@ import { Stack } from 'expo-router';
 import { ICONS } from '../../constants';
 
 import { useAppContext } from '../../context/context';
-
-import * as WebBrowser from 'expo-web-browser';
-
-WebBrowser.maybeCompleteAuthSession();
+import { PaperProvider } from 'react-native-paper';
 
 export default function index() {
   const { state } = useAppContext();
@@ -23,18 +21,30 @@ export default function index() {
     return <LoadingSpinner />;
   }
 
+  function dismissHandler() {
+    dispatch({ type: 'HIDE_MODAL' });
+    dispatch({ type: 'HIDE_ERROR' });
+  }
+
   return (
-    <View style={styles.container}>
-      <Stack.Screen
-        options={{
-          header: () => {
-            return (
-              <SettingsHeader icon={ICONS.profileIcon} title={'Profile'} />
-            );
-          },
-        }}
-      />
-      {state?.user ? <Profile /> : <Auth />}
-    </View>
+    <PaperProvider>
+      <View style={styles.container}>
+        <Stack.Screen
+          options={{
+            header: () => {
+              return (
+                <SettingsHeader icon={ICONS.profileIcon} title={'Profile'} />
+              );
+            },
+          }}
+        />
+        <MessageModal
+          visible={state?.modalVisible}
+          onDismiss={() => dismissHandler()}
+        />
+
+        {state?.user ? <Profile /> : <Auth />}
+      </View>
+    </PaperProvider>
   );
 }
