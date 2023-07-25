@@ -15,14 +15,13 @@ import { useAppContext } from '../../context/context';
 import { PaperProvider } from 'react-native-paper';
 
 export default function index() {
-  const { state } = useAppContext();
+  const { state, dispatch } = useAppContext();
 
   if (state?.isLoading) {
     return <LoadingSpinner />;
   }
 
   function dismissHandler() {
-    dispatch({ type: 'HIDE_MODAL' });
     dispatch({ type: 'HIDE_ERROR' });
   }
 

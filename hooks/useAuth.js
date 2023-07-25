@@ -57,7 +57,6 @@ function useAuth() {
       router.replace('/home');
     } catch (error) {
       console.log('error:', error.message);
-      // setError({ ...error, hasError: true, errorMessage: error.message });
       dispatch({ type: 'SHOW_ERROR', payload: error.message });
     }
   };
@@ -69,8 +68,6 @@ function useAuth() {
       router.replace('/home');
     } catch (error) {
       console.log('error:', error.message);
-      // setError({ ...error, hasError: true, errorMessage: error.message });
-      // dispatch({type: 'SHOW_ERROR', payload:})
       dispatch({ type: 'SHOW_ERROR', payload: error.message });
     }
   };

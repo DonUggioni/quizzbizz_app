@@ -2,6 +2,9 @@ import 'react-native-gesture-handler';
 import { Stack } from 'expo-router';
 import { useFonts } from 'expo-font';
 import ContextProvider from '../context/context';
+import { useEffect } from 'react';
+
+import * as SplashScreen from 'expo-splash-screen';
 
 export const unstable_settings = {
   // Ensure any route can link back to `/`

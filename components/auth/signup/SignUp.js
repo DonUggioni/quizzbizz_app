@@ -10,13 +10,24 @@ import SocialAuthButton from '../socialAuthButton/SocialAuthButton';
 import Divider from '../divider/Divider';
 import ActionButton from '../../actionButton/ActionButton';
 
+import { useAppContext } from '../../../context/context';
+
 import useAuth from '../../../hooks/useAuth';
 
 import * as WebBrowser from 'expo-web-browser';
 
 WebBrowser.maybeCompleteAuthSession();
 
+function isValidEmail(email) {
+  // Regular expression to validate email addresses
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+  // Test the email against the regex pattern
+  return emailRegex.test(email);
+}
+
 export default function SignUp() {
+  const { dispatch } = useAppContext();
   const { googlePromptAsync, createUser } = useAuth();
   const [inputValues, setInputValues] = useState({
     email: '',
@@ -26,14 +37,34 @@ export default function SignUp() {
   const [hidePassword, setHidePassword] = useState(true);
   const [hideConfirmPassword, setHideConfirmPassword] = useState(true);
 
+  function createUserHandler() {
+    const isValid = isValidEmail(inputValues.email);
+
+    if (!isValid) {
+      dispatch({
+        type: 'SHOW_ERROR',
+        payload: 'Please enter a valid email address.',
+      });
+    } else if (inputValues.password.length < 8) {
+      dispatch({
+        type: 'SHOW_ERROR',
+        payload: 'Password must contain at least 8 characters.',
+      });
+    } else if (inputValues.password !== inputValues.confirmPassword) {
+      dispatch({
+        type: 'SHOW_ERROR',
+        payload: "Passwords don't match.",
+      });
+    } else {
+      createUser(inputValues.email, inputValues.password);
+    }
+  }
+
   function displayButtons() {
     if (inputValues.email) {
       return (
         <Animated.View entering={FadeInDown} style={styles.signBtnContainer}>
-          <ActionButton
-            text='Submit'
-            onPress={() => createUser(inputValues.email, inputValues.password)}
-          />
+          <ActionButton text='Submit' onPress={() => createUserHandler()} />
         </Animated.View>
       );
     } else {

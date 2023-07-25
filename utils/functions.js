@@ -75,8 +75,10 @@ function translateFirebaseError(err) {
       return 'The provided email is already in use by an existing user.';
     case 'Firebase: Error (auth/missing-password).':
       return 'Password cannot be empty.';
+    case 'Firebase: Error (auth/email-already-in-use).':
+      return 'This email address is already in use.';
     default:
-      return 'Check your credentials and try again.';
+      return err ? err : 'Check your credentials and try again.';
   }
 }
 

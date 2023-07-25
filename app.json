@@ -6,6 +6,10 @@
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "backgroundColor": "#001524",
+    "splash": {
+      "image": "./assets/images/splashScreen.png",
+      "resizeMode": "cover"
+    },
     "web": {
       "bundler": "metro"
     },
@@ -15,7 +19,11 @@
       }
     },
     "android": {
-      "package": "com.quizapp"
+      "package": "com.quizapp",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptiveIcon.png",
+        "backgroundColor": "#001524"
+      }
     },
     "ios": {
       "bundleIdentifier": "com.quizapp",
