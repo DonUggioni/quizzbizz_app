@@ -6,10 +6,6 @@
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "backgroundColor": "#001524",
-    "splash": {
-      "image": "./assets/images/splashScreen.png",
-      "resizeMode": "cover"
-    },
     "web": {
       "bundler": "metro"
     },

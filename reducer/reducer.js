@@ -8,6 +8,8 @@ const reducer = (state, action) => {
         isLoading: false,
         error: { ...state.error, error: true },
       };
+    case 'FETCH_SUBJECT_LIST':
+      return { ...state, subjectList: action.payload };
     case 'CURRENT_SUBJECT':
       return { ...state, currentSubject: action.payload };
     case 'NEXT_QUESTION':
@@ -72,7 +74,19 @@ const reducer = (state, action) => {
         gamesPlayed: action.payload.gamesPlayed,
       };
     case 'SIGN_OUT':
-      return { ...state, user: null, totalPoints: 0 };
+      return {
+        ...state,
+        quizData: [],
+        user: null,
+        userPreferences: {},
+        points: 0,
+        totalPoints: 0,
+        correctAnswers: 0,
+        wrongAnswers: 0,
+        gamesPlayed: 0,
+        totalCorrectAnswers: 0,
+        totalWrongAnswers: 0,
+      };
     case 'SHOW_ERROR':
       return {
         ...state,
@@ -85,7 +99,6 @@ const reducer = (state, action) => {
         error: { ...state.error, message: '' },
         modalVisible: false,
       };
-
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
   }

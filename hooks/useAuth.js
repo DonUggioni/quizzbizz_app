@@ -1,5 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
-
+import { useEffect } from 'react';
 import {
   GoogleAuthProvider,
   signInWithCredential,
@@ -7,22 +6,14 @@ import {
   signInWithEmailAndPassword,
 } from 'firebase/auth';
 import * as Google from 'expo-auth-session/providers/google';
-
 import { IOS_CLIENT_ID, ANDROID_CLIENT_ID } from '@env';
-
 import { auth } from '../firebase/config';
-
 import { useRouter } from 'expo-router';
-
 import { useAppContext } from '../context/context';
 
 function useAuth() {
   const { state, dispatch } = useAppContext();
   const router = useRouter();
-  const [error, setError] = useState({
-    hasError: false,
-    errorMessage: '',
-  });
 
   const [_, googleResponse, googlePromptAsync] = Google.useAuthRequest({
     iosClientId: IOS_CLIENT_ID,
@@ -52,9 +43,9 @@ function useAuth() {
 
   const createUser = async (email, password) => {
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      console.log('user created');
+      const user = await createUserWithEmailAndPassword(auth, email, password);
       router.replace('/home');
+      dispatch({ type: 'SET_USER', payload: user.user });
     } catch (error) {
       console.log('error:', error.message);
       dispatch({ type: 'SHOW_ERROR', payload: error.message });
@@ -74,7 +65,6 @@ function useAuth() {
 
   return {
     googlePromptAsync,
-    error,
     createUser,
     signinUser,
   };

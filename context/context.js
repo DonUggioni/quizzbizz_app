@@ -7,6 +7,7 @@ const DEFAULT_NUM_OF_QUESTIONS = 15;
 
 const initialState = {
   quizData: [],
+  subjectList: [],
   user: null,
   userPreferences: {
     difficulty: 'any',

@@ -8,7 +8,7 @@ import { styles } from './subjectList.styles';
 import SubjectCard from '../cards/subjectCard/SubjectCard';
 import ActionButton from '../actionButton/ActionButton';
 
-import { removeGeneralCategory } from '../../utils/functions';
+import { fetchData, removeGeneralCategory } from '../../utils/functions';
 import { getData } from '../../utils/functions';
 import { useAppContext } from '../../context/context';
 import LoadingScreen from '../loadingScreen/LoadingScreen';
@@ -16,33 +16,17 @@ import LoadingScreen from '../loadingScreen/LoadingScreen';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import PointsDisplay from '../pointsDisplay/PointsDisplay';
 
+import useFetch from '../../hooks/useFetch';
+
 export default function SubjectList() {
   const router = useRouter();
+  const { fetchQuestions } = useFetch();
   const { dispatch, state } = useAppContext();
   const [activeSubject, setActiveSubject] = useState(null);
 
-  async function fetchData(endpoint, params) {
-    dispatch({ type: 'SHOW_LOADING_SCREEN' });
-    try {
-      const result = await getData(endpoint, params);
-      dispatch({
-        type: 'FETCH_DATA_SUCCESS',
-        payload: result,
-      });
-      setTimeout(() => {
-        dispatch({ type: 'HIDE_LOADING_SCREEN' });
-      }, 2000);
-    } catch (error) {
-      console.log(error);
-      dispatch({
-        type: 'FETCH_DATA_ERROR',
-      });
-    }
-  }
-
-  useEffect(() => {
-    fetchData('api_category.php');
-  }, []);
+  // useEffect(() => {
+  //   fetchData('api_category.php');
+  // }, []);
 
   function handleCardPress(item) {
     setActiveSubject(item);
@@ -65,7 +49,7 @@ export default function SubjectList() {
       params.difficulty = state?.userPreferences.difficulty;
     }
 
-    fetchData('api.php', params);
+    fetchQuestions('api.php', params);
 
     setTimeout(() => {
       router.replace(`/questions/${activeSubject.id}`);
@@ -112,7 +96,7 @@ export default function SubjectList() {
         Pick a subject
       </Text>
       <FlatList
-        data={state.quizData.trivia_categories}
+        data={state.subjectList.trivia_categories}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
           <SubjectCard

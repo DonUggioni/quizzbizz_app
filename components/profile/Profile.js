@@ -28,7 +28,6 @@ export default function Profile() {
       await AsyncStorage.removeItem('@QuizMeData');
       router.replace('/home');
       dispatch({ type: 'SIGN_OUT' });
-      dispatch({ type: 'RESTART' });
     } catch (error) {
       console.log(error);
     }

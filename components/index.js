@@ -15,6 +15,7 @@ import SettingsHeader from './customHeaders/settingsHeader/SettingsHeader';
 import Auth from './auth/Auth';
 import Profile from './profile/Profile';
 import LoadingSpinner from './loadingSpinner/LoadingSpinner';
+import SplashScreen from './splashScreen/SplashScreen';
 
 export {
   CustomHomeHeader,
@@ -34,4 +35,5 @@ export {
   Auth,
   Profile,
   LoadingSpinner,
+  SplashScreen,
 };

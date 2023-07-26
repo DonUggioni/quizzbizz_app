@@ -1,32 +1,40 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { getData } from '../utils/functions';
+import { useAppContext } from '../context/context';
 
-function useFetch(endpoint) {
-  const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+function useFetch() {
+  const { dispatch } = useAppContext();
 
-  const fetchData = async () => {
-    setIsLoading(true);
-
+  async function fetchQuestions(endpoint, params) {
     try {
-      const response = await axios.get(`https://opentdb.com/${endpoint}`);
-
-      setData(response.data);
-      setIsLoading(false);
+      const result = await getData(endpoint, params);
+      dispatch({
+        type: 'FETCH_DATA_SUCCESS',
+        payload: result,
+      });
     } catch (error) {
-      setError(error);
       console.log(error);
-    } finally {
-      setIsLoading(false);
+      dispatch({
+        type: 'FETCH_DATA_ERROR',
+      });
     }
-  };
+  }
 
-  useEffect(() => {
-    fetchData();
-  }, [endpoint]);
+  async function fetchSubjectList(endpoint) {
+    try {
+      const result = await getData(endpoint);
+      dispatch({
+        type: 'FETCH_SUBJECT_LIST',
+        payload: result,
+      });
+    } catch (error) {
+      console.log(error);
+      dispatch({
+        type: 'FETCH_DATA_ERROR',
+      });
+    }
+  }
 
-  return { data, isLoading, error };
+  return { fetchQuestions, fetchSubjectList };
 }
 
 export default useFetch;
