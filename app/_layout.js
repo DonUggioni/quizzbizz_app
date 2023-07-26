@@ -15,11 +15,12 @@ import { doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { generateRandomUsername } from '../utils/functions';
+import { StatusBar } from 'expo-status-bar';
 
-export const unstable_settings = {
-  // Ensure any route can link back to `/`
-  initialRouteName: 'index',
-};
+// export const unstable_settings = {
+//   // Ensure any route can link back to `/`
+//   initialRouteName: 'index',
+// };
 
 const DUMMY_AVATAR_URL = 'https://i.pravatar.cc/100';
 
@@ -101,6 +102,8 @@ function RootApp() {
 
   return (
     <>
+      <StatusBar style='light' />
+
       {isLoading ? (
         <SplashScreen setIsLoading={setIsLoading} />
       ) : (

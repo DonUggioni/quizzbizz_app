@@ -16,6 +16,7 @@
     },
     "android": {
       "package": "com.quizapp",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptiveIcon.png",
         "backgroundColor": "#001524"
