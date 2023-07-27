@@ -17,12 +17,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { generateRandomUsername } from '../utils/functions';
 import { StatusBar } from 'expo-status-bar';
 
-// export const unstable_settings = {
-//   // Ensure any route can link back to `/`
-//   initialRouteName: 'index',
-// };
-
-const DUMMY_AVATAR_URL = 'https://i.pravatar.cc/100';
+import { DUMMY_AVATAR_URL } from '../utils/defaults';
 
 function RootApp() {
   const { state, dispatch } = useAppContext();
@@ -30,15 +25,15 @@ function RootApp() {
   const [isLoading, setIsLoading] = useState(true);
   const randomUsername = generateRandomUsername();
 
-  const userData = {
+  let userData = {
     userPreferences: state?.userPreferences,
     totalPoints: state?.totalPoints,
     totalCorrectAnswers: state?.totalCorrectAnswers,
     totalWrongAnswers: state?.totalWrongAnswers,
     gamesPlayed: state?.gamesPlayed,
     serverTimestamp: serverTimestamp(),
-    displayName: state?.displayName ? state?.displayName : randomUsername,
-    photoURL: state?.photoURL ? state?.photoURL : DUMMY_AVATAR_URL,
+    displayName: randomUsername,
+    photoURL: DUMMY_AVATAR_URL,
   };
 
   useEffect(() => {
@@ -58,7 +53,6 @@ function RootApp() {
           uid: user.uid,
           email: user.email,
         };
-
         dispatch({ type: 'SET_USER', payload: user });
 
         // Storing basic user info in local storage to retrieve on reload
@@ -79,6 +73,12 @@ function RootApp() {
           } catch (error) {
             console.log('display name error', error.message);
           }
+        } else {
+          userData = {
+            ...userData,
+            displayName: user.displayName,
+            photoURL: user.photoURL,
+          };
         }
 
         // Checking if user info exists on DB, if not, it will be created.

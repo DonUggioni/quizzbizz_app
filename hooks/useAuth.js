@@ -12,18 +12,13 @@ import { useRouter } from 'expo-router';
 import { useAppContext } from '../context/context';
 
 function useAuth() {
-  const { state, dispatch } = useAppContext();
+  const { dispatch } = useAppContext();
   const router = useRouter();
 
   const [_, googleResponse, googlePromptAsync] = Google.useAuthRequest({
     iosClientId: IOS_CLIENT_ID,
     androidClientId: ANDROID_CLIENT_ID,
   });
-
-  // const [request, facebookResponse, facebookPromptAsync] =
-  //   Facebook.useAuthRequest({
-  //     clientId: FACEBOOK_CLIENT_ID,
-  //   });
 
   useEffect(() => {
     if (googleResponse?.type === 'success') {
@@ -32,14 +27,6 @@ function useAuth() {
       signInWithCredential(auth, credential);
     }
   }, [googleResponse]);
-
-  // useEffect(() => {
-  //   if (facebookResponse?.type === 'success') {
-  //     const { id_token } = facebookResponse.params;
-  //     const credential = FacebookAuthProvider.credential(id_token);
-  //     signInWithCredential(auth, credential);
-  //   }
-  // }, [facebookResponse]);
 
   const createUser = async (email, password) => {
     try {

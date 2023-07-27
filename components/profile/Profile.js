@@ -47,7 +47,10 @@ export default function Profile() {
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.text}>Username: {state?.user.displayName}</Text>
+        <Text style={styles.text}>
+          Username:{' '}
+          {state?.displayName ? state.displayName : state.user.displayName}
+        </Text>
         <Text style={styles.text}>Email: {state?.user.email}</Text>
         <Text style={styles.text}>Games played: {state?.gamesPlayed}</Text>
         <Text style={styles.text}>

@@ -1,3 +1,8 @@
+import {
+  DEFAULT_NUM_OF_QUESTIONS,
+  DEFAULT_QUESTION_DIFFICULTY,
+} from '../utils/defaults';
+
 const reducer = (state, action) => {
   switch (action.type) {
     case 'FETCH_DATA_SUCCESS':
@@ -77,8 +82,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         quizData: [],
+        userPreferences: {
+          difficulty: DEFAULT_QUESTION_DIFFICULTY,
+          numOfQuestions: DEFAULT_NUM_OF_QUESTIONS,
+        },
         user: null,
-        userPreferences: {},
         points: 0,
         totalPoints: 0,
         correctAnswers: 0,

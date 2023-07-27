@@ -1,16 +1,19 @@
 import { createContext, useContext, useReducer } from 'react';
 import reducer from '../reducer/reducer';
 
-const AppContext = createContext();
+import {
+  DEFAULT_NUM_OF_QUESTIONS,
+  DEFAULT_QUESTION_DIFFICULTY,
+} from '../utils/defaults';
 
-const DEFAULT_NUM_OF_QUESTIONS = 15;
+const AppContext = createContext();
 
 const initialState = {
   quizData: [],
   subjectList: [],
   user: null,
   userPreferences: {
-    difficulty: 'any',
+    difficulty: DEFAULT_QUESTION_DIFFICULTY,
     numOfQuestions: DEFAULT_NUM_OF_QUESTIONS,
   },
   currentSubject: {},

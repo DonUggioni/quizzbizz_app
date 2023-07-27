@@ -13,7 +13,7 @@ export default function oauthredirect() {
 
   setTimeout(() => {
     router.replace('/home');
-  }, 1500);
+  }, 2500);
 
   return (
     <View style={styles.container}>
