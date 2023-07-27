@@ -6,7 +6,6 @@ import {
   signInWithEmailAndPassword,
 } from 'firebase/auth';
 import * as Google from 'expo-auth-session/providers/google';
-import { IOS_CLIENT_ID, ANDROID_CLIENT_ID } from '@env';
 import { auth } from '../firebase/config';
 import { useRouter } from 'expo-router';
 import { useAppContext } from '../context/context';
@@ -16,8 +15,8 @@ function useAuth() {
   const router = useRouter();
 
   const [_, googleResponse, googlePromptAsync] = Google.useAuthRequest({
-    iosClientId: IOS_CLIENT_ID || 'mock_id',
-    androidClientId: ANDROID_CLIENT_ID || 'mock_id',
+    iosClientId: process.env.IOS_CLIENT_ID,
+    androidClientId: process.env.ANDROID_CLIENT_ID,
   });
 
   useEffect(() => {
