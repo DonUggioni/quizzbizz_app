@@ -1,11 +1,12 @@
 {
   "expo": {
     "scheme": "quiz-me-app",
-    "name": "Quiz Me",
+    "name": "QuizMe",
     "slug": "quiz-me-app",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "backgroundColor": "#001524",
+    "icon": "./assets/images/Icon.png",
     "web": {
       "bundler": "metro"
     },

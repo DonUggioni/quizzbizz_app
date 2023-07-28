@@ -14,9 +14,11 @@ import { useAppContext } from '../../context/context';
 import { doc, setDoc } from 'firebase/firestore';
 import { db } from '../../firebase/config';
 
-const EASY_QUESTION_POINTS = 10;
-const MEDIUM_QUESTION_POINTS = 15;
-const HARD_QUESTION_POINTS = 20;
+import {
+  EASY_QUESTION_POINTS,
+  MEDIUM_QUESTION_POINTS,
+  HARD_QUESTION_POINTS,
+} from '../../utils/defaults';
 
 export default function QuestionList() {
   const [choosenAnswer, setChoosenAnswer] = useState(null);

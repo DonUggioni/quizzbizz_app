@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { View, Text, FlatList } from 'react-native';
 
 import { useRouter } from 'expo-router';
@@ -8,8 +8,7 @@ import { styles } from './subjectList.styles';
 import SubjectCard from '../cards/subjectCard/SubjectCard';
 import ActionButton from '../actionButton/ActionButton';
 
-import { fetchData, removeGeneralCategory } from '../../utils/functions';
-import { getData } from '../../utils/functions';
+import { removeGeneralCategory } from '../../utils/functions';
 import { useAppContext } from '../../context/context';
 import LoadingScreen from '../loadingScreen/LoadingScreen';
 
@@ -23,10 +22,6 @@ export default function SubjectList() {
   const { fetchQuestions } = useFetch();
   const { dispatch, state } = useAppContext();
   const [activeSubject, setActiveSubject] = useState(null);
-
-  // useEffect(() => {
-  //   fetchData('api_category.php');
-  // }, []);
 
   function handleCardPress(item) {
     setActiveSubject(item);

@@ -1,6 +1,5 @@
 import { View } from 'react-native';
 import React from 'react';
-import GeneralHeader from '../../components/customHeaders/generalHeader/GeneralHeader';
 import { COLORS, ICONS } from '../../constants';
 import { Stack } from 'expo-router';
 import { Options, SettingsHeader } from '../../components';

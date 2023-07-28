@@ -1,10 +1,6 @@
-import { useEffect } from 'react';
 import { Text } from 'react-native';
-
 import Animated, { Easing, SlideInUp } from 'react-native-reanimated';
-
 import { styles } from './pointsDisplay.styles';
-
 import { useAppContext } from '../../context/context';
 
 export default function PointsDisplay() {
