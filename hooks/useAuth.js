@@ -15,8 +15,8 @@ function useAuth() {
   const router = useRouter();
 
   const [_, googleResponse, googlePromptAsync] = Google.useAuthRequest({
-    iosClientId: process.env.IOS_CLIENT_ID,
-    androidClientId: process.env.ANDROID_CLIENT_ID,
+    iosClientId: `${process.env.IOS_CLIENT_ID}`,
+    androidClientId: `${process.env.ANDROID_CLIENT_ID}`,
   });
 
   useEffect(() => {
