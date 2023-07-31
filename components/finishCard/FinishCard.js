@@ -79,7 +79,7 @@ export default function FinishCard() {
       </View>
       <View style={styles.btnContainer}>
         <Animated.View entering={FadeInDown.delay(1200).duration(1200)}>
-          <ActionButton text={'Quiz Me Again'} onPress={() => restartQuiz()} />
+          <ActionButton text={'Quizz Me Again'} onPress={() => restartQuiz()} />
         </Animated.View>
       </View>
     </>

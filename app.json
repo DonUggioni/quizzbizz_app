@@ -1,7 +1,7 @@
 {
   "expo": {
     "scheme": "quiz-me-app",
-    "name": "QuizMe",
+    "name": "QuizzBizz",
     "slug": "quiz-me-app",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
@@ -16,7 +16,7 @@
       }
     },
     "android": {
-      "package": "com.quizapp",
+      "package": "com.quizzbizz.app",
       "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptiveIcon.png",
@@ -24,7 +24,7 @@
       }
     },
     "ios": {
-      "bundleIdentifier": "com.quizapp",
+      "bundleIdentifier": "com.quizzbizz.app",
       "supportsTablet": true
     },
     "version": "1.0.0",

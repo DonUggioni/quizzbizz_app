@@ -17,7 +17,7 @@ export default function CustomHomeHeader() {
         btnHeight={30}
         onPress={() => router.push('/options')}
       />
-      <Text style={styles.heading}>QuizMe</Text>
+      <Text style={styles.heading}>QuizzBizz</Text>
       <HeaderIcon
         source={ICONS.profileIcon}
         btnWidth={35}
