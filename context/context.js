@@ -16,7 +16,7 @@ const initialState = {
     difficulty: DEFAULT_QUESTION_DIFFICULTY,
     numOfQuestions: DEFAULT_NUM_OF_QUESTIONS,
   },
-  currentSubject: {},
+  currentSubject: null,
   points: 0,
   totalPoints: 0,
   index: 0,

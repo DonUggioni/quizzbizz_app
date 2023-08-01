@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 
 import SignIn from './signin/SignIn';
 import SignUp from './signup/SignUp';
@@ -19,6 +19,11 @@ export default function Auth() {
       >
         {signin ? "Don't have an account yet?" : 'Already have an account?'}
       </Button>
+      <View style={styles.textContainer}>
+        <Text style={styles.text}>
+          By signing up you agree to the privacy policy and term and conditions.
+        </Text>
+      </View>
     </View>
   );
 }

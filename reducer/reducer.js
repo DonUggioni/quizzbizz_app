@@ -38,6 +38,7 @@ const reducer = (state, action) => {
         wrongAnswers: 0,
         modalVisible: false,
         quizData: [],
+        currentSubject: null,
       };
     case 'SHOW_MODAL':
       return { ...state, modalVisible: true };
@@ -58,6 +59,7 @@ const reducer = (state, action) => {
         points: 0,
         index: 0,
         quizData: [],
+        currentSubject: null,
       };
     case 'SHOW_LOADING_SCREEN':
       return { ...state, isLoading: true };
@@ -94,6 +96,7 @@ const reducer = (state, action) => {
         gamesPlayed: 0,
         totalCorrectAnswers: 0,
         totalWrongAnswers: 0,
+        currentSubject: null,
       };
     case 'SHOW_ERROR':
       return {

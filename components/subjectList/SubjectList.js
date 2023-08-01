@@ -1,8 +1,6 @@
 import { useMemo, useState } from 'react';
 import { View, Text, FlatList } from 'react-native';
 
-import { useRouter } from 'expo-router';
-
 import { ICONS, MARGIN } from '../../constants';
 import { styles } from './subjectList.styles';
 import SubjectCard from '../cards/subjectCard/SubjectCard';
@@ -18,13 +16,10 @@ import PointsDisplay from '../pointsDisplay/PointsDisplay';
 import useFetch from '../../hooks/useFetch';
 
 export default function SubjectList() {
-  const router = useRouter();
   const { fetchQuestions } = useFetch();
   const { dispatch, state } = useAppContext();
-  const [activeSubject, setActiveSubject] = useState(null);
 
   function handleCardPress(item) {
-    setActiveSubject(item);
     dispatch({ type: 'SET_CURRENT_SUBJECT', payload: item });
   }
 
@@ -33,23 +28,17 @@ export default function SubjectList() {
   }, [state.isLoading]);
 
   function submitHandler() {
-    dispatch({ type: 'SHOW_LOADING_SCREEN' });
-
     const params = {
       amount: state?.userPreferences.numOfQuestions,
-      category: activeSubject?.id,
+      category: state.currentSubject.id,
     };
 
     if (state.userPreferences?.difficulty !== 'any') {
       params.difficulty = state?.userPreferences.difficulty;
     }
 
+    // This hook is handling the routing after fetching the questions
     fetchQuestions('api.php', params);
-
-    setTimeout(() => {
-      router.replace(`/questions/${activeSubject.id}`);
-      dispatch({ type: 'HIDE_LOADING_SCREEN' });
-    }, 2500);
   }
 
   if (state.isLoading) {
@@ -98,17 +87,17 @@ export default function SubjectList() {
             source={ICONS[`icon-${item.id}`]}
             subject={removeGeneralCategory(item.name)}
             onPress={() => handleCardPress(item)}
-            isActive={activeSubject?.name === item.name}
+            isActive={state.currentSubject?.name === item.name}
           />
         )}
         keyExtractor={(item) => item.id}
       />
-      {activeSubject !== null && (
+      {state.currentSubject !== null && (
         <Animated.View entering={FadeInDown.duration(400)}>
           <ActionButton
-            disabled={activeSubject === null ? true : false}
+            disabled={state.currentSubject === null ? true : false}
             onPress={() => submitHandler()}
-            text={'Quiz Me'}
+            text={'Quizz Me'}
           />
         </Animated.View>
       )}
