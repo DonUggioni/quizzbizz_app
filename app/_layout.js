@@ -17,7 +17,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { generateRandomUsername } from '../utils/functions';
 import { StatusBar } from 'expo-status-bar';
 
+import { init } from '@aptabase/react-native';
+
 import { DUMMY_AVATAR_URL } from '../utils/defaults';
+
+init(process.env.APTABASE_APP_KEY);
 
 function RootApp() {
   const { state, dispatch } = useAppContext();

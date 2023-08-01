@@ -14,6 +14,7 @@ import Animated, { FadeInDown } from 'react-native-reanimated';
 import PointsDisplay from '../pointsDisplay/PointsDisplay';
 
 import useFetch from '../../hooks/useFetch';
+import { trackEvent } from '@aptabase/react-native';
 
 export default function SubjectList() {
   const { fetchQuestions } = useFetch();
@@ -28,6 +29,8 @@ export default function SubjectList() {
   }, [state.isLoading]);
 
   function submitHandler() {
+    trackEvent('clicked', { button: 'start_game' });
+
     const params = {
       amount: state?.userPreferences.numOfQuestions,
       category: state.currentSubject.id,

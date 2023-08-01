@@ -11,6 +11,7 @@ import ActionButton from '../actionButton/ActionButton';
 import { useRouter } from 'expo-router';
 
 import Animated, { BounceInUp, FadeInDown } from 'react-native-reanimated';
+import { trackEvent } from '@aptabase/react-native';
 
 export default function FinishCard() {
   const { state, dispatch } = useAppContext();
@@ -24,6 +25,7 @@ export default function FinishCard() {
   );
 
   function restartQuiz() {
+    trackEvent('clicked', { button: 'play_again' });
     dispatch({ type: 'RESTART' });
     router.replace('/home');
   }
