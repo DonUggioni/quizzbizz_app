@@ -14,7 +14,7 @@ export default function SplashScreen({ setIsLoading }) {
         style={styles.animationSize}
         autoPlay
         loop={false}
-        speed={0.8}
+        speed={0.7}
         onAnimationFinish={() => setIsLoading(false)}
       />
     </View>
