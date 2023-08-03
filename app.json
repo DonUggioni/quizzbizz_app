@@ -28,9 +28,15 @@
       "supportsTablet": true
     },
     "version": "1.0.0",
-    "sdkVersion": "48.0.0",
-    "platforms": ["ios", "android", "web"],
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "currentFullName": "@donuggioni/quiz-me-app",
-    "originalFullName": "@donuggioni/quiz-me-app"
+    "originalFullName": "@donuggioni/quiz-me-app",
+    "plugins": [
+      "expo-router"
+    ]
   }
 }
