@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import { Button } from 'react-native-paper';
 
 import Selector from './selector/Selector';
@@ -12,6 +12,8 @@ import { COLORS } from '../../constants';
 import {
   DIFFICULTY_OPTIONS,
   NUM_OF_QUESTIONS_OPTIONS,
+  BACKGROUND_MUSIC_OPTIONS,
+  SOUND_EFFECTS_OPTIONS,
 } from '../../utils/optionsData';
 
 import { useRouter } from 'expo-router';
@@ -25,6 +27,8 @@ export default function Options() {
   const [userSettings, setUserSettings] = useState({
     difficulty: state?.userPreferences.difficulty,
     numOfQuestions: state?.userPreferences.numOfQuestions,
+    backgroundMusic: state.userPreferences.backgroundMusic,
+    soundEffects: state.userPreferences.soundEffects,
   });
   const [isSaving, setIsSaving] = useState(false);
 
@@ -32,10 +36,14 @@ export default function Options() {
   function onSelect(data) {
     switch (data.category) {
       case 'difficulty':
-        setUserSettings({ ...userSettings, difficulty: data.text });
-        break;
+        return setUserSettings({ ...userSettings, difficulty: data.text });
+
       case 'numOfQuestions':
-        setUserSettings({ ...userSettings, numOfQuestions: data.text });
+        return setUserSettings({ ...userSettings, numOfQuestions: data.text });
+      case 'backgroundMusic':
+        return setUserSettings({ ...userSettings, backgroundMusic: data.text });
+      case 'soundEffects':
+        return setUserSettings({ ...userSettings, soundEffects: data.text });
       default:
         return userSettings;
     }
@@ -73,7 +81,7 @@ export default function Options() {
 
   return (
     <View style={styles.container}>
-      <View>
+      <ScrollView>
         <Selector
           data={DIFFICULTY_OPTIONS}
           title={'Select a default question difficulty level'}
@@ -89,7 +97,23 @@ export default function Options() {
           onSelected={onSelect}
           currentValue={state?.userPreferences.numOfQuestions}
         />
-      </View>
+        <Selector
+          data={BACKGROUND_MUSIC_OPTIONS}
+          title={'Background music'}
+          onSelected={onSelect}
+          currentValue={capitalizeFirstChar(
+            state?.userPreferences.backgroundMusic
+          )}
+        />
+        <Selector
+          data={SOUND_EFFECTS_OPTIONS}
+          title={'Sound effects'}
+          onSelected={onSelect}
+          currentValue={capitalizeFirstChar(
+            state?.userPreferences.soundEffects
+          )}
+        />
+      </ScrollView>
       <View style={styles.btnContainer}>
         <Button
           style={styles.btn}

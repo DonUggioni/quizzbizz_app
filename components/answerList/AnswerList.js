@@ -14,6 +14,9 @@ import { useAppContext } from '../../context/context';
 import { doc, setDoc } from 'firebase/firestore';
 import { db } from '../../firebase/config';
 
+import useSound from '../../hooks/useSound';
+import { SOUNDS } from '../../constants';
+
 import {
   EASY_QUESTION_POINTS,
   MEDIUM_QUESTION_POINTS,
@@ -25,6 +28,7 @@ export default function QuestionList() {
   const [answerStyle, setAnswerStyle] = useState('');
   const router = useRouter();
   const { dispatch, state } = useAppContext();
+  const { playSoundEffect, stopMusic } = useSound();
 
   const incorrectAnswers =
     state.quizData?.results[state.index]?.incorrect_answers;
@@ -53,24 +57,30 @@ export default function QuestionList() {
 
     if (choosenAnswer === correctAnswer) {
       if (!choosenAnswer) return;
+      playSoundEffect(SOUNDS.rightAnswer);
+
       if (questionDifficulty === 'easy') {
         dispatch({ type: 'ADD_POINTS', payload: EASY_QUESTION_POINTS });
       }
+
       if (questionDifficulty === 'medium') {
         dispatch({ type: 'ADD_POINTS', payload: MEDIUM_QUESTION_POINTS });
       }
+
       if (questionDifficulty === 'hard') {
         dispatch({ type: 'ADD_POINTS', payload: HARD_QUESTION_POINTS });
       }
       dispatch({ type: 'ADD_CORRECT_ANSWER' });
     } else {
       dispatch({ type: 'ADD_WRONG_ANSWER' });
+      playSoundEffect(SOUNDS.wrongAnswer);
     }
 
     setTimeout(() => {
       if (state?.index + 1 === state.quizData.results?.length) {
         dispatch({ type: 'UPDATE_GAME_STATS' });
 
+        stopMusic();
         router.replace('/finishStats');
       }
       setAnswerStyle('');

@@ -1,49 +1,69 @@
-import { useState } from 'react';
 import { Audio } from 'expo-av';
 import { useAppContext } from '../context/context';
 
 function useSound() {
-  const { state } = useAppContext();
-  const [sound, setSound] = useState(null);
+  const { state, dispatch } = useAppContext();
 
   async function playMusic(music) {
-    if (state.music === false) return;
+    if (state.userPreferences.backgroundMusic === 'off') return;
 
-    console.log('Loading Sound');
-    const { sound } = await Audio.Sound.createAsync(music, {
-      shouldPlay: true,
-      isLooping: true,
-    });
-    setSound(sound);
+    try {
+      console.log('Loading Sound');
+      const { sound } = await Audio.Sound.createAsync(music, {
+        shouldPlay: true,
+        isLooping: true,
+      });
 
-    console.log('Playing Sound');
-    await sound.setPositionAsync(0);
-    await sound.playAsync();
-  }
-
-  async function playSoundEffect(soundEffect) {
-    if (state.soundEffects === false) return;
-
-    console.log('Loading Sound');
-    const { sound } = await Audio.Sound.createAsync(soundEffect, {
-      shouldPlay: true,
-    });
-    setSound(sound);
-
-    console.log('Playing Sound');
-    await sound.playAsync();
-  }
-
-  async function stopSound() {
-    if (sound) {
-      console.log('Stopping Sound');
-      await sound.stopAsync();
-      await sound.unloadAsync();
-      setSound(null);
+      const status = await sound.getStatusAsync();
+      if (status.isLoaded) {
+        await sound.setPositionAsync(0);
+        await sound.playAsync();
+        dispatch({ type: 'SET_CURRENT_MUSIC', payload: sound });
+      } else {
+        console.log('Sound is not loaded');
+      }
+    } catch (error) {
+      console.error('Error playing music:', error);
     }
   }
 
-  return { playMusic, playSoundEffect, stopSound };
+  async function playSoundEffect(soundEffect) {
+    if (state.userPreferences.soundEffects === 'off') return;
+
+    try {
+      const { sound } = await Audio.Sound.createAsync(soundEffect, {
+        shouldPlay: true,
+      });
+
+      sound.setOnPlaybackStatusUpdate(async (status) => {
+        if (!status.didJustFinish) return;
+        await sound.unloadAsync();
+      });
+
+      const status = await sound.getStatusAsync();
+      if (status.isLoaded) {
+        await sound.playAsync();
+      } else {
+        console.log('Sound is not loaded');
+      }
+    } catch (error) {
+      console.error('Error playing sound effect:', error);
+    }
+  }
+
+  async function stopMusic() {
+    if (state.currentMusic !== null) {
+      try {
+        await state.currentMusic.stopAsync();
+        await state.currentMusic.unloadAsync();
+        dispatch({ type: 'SET_CURRENT_MUSIC', payload: null });
+      } catch (error) {
+        console.error('Error stopping sound:', error);
+      }
+    }
+  }
+
+  return { playMusic, playSoundEffect, stopMusic };
 }
 
 export default useSound;

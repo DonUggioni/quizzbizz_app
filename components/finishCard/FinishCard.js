@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native';
 import { styles } from './finishCard.styles';
 
-import { ANIMATIONS } from '../../constants';
+import { ANIMATIONS, SOUNDS } from '../../constants';
 import Lottie from 'lottie-react-native';
 
 import { useAppContext } from '../../context/context';
@@ -13,8 +13,11 @@ import { useRouter } from 'expo-router';
 import Animated, { BounceInUp, FadeInDown } from 'react-native-reanimated';
 import { trackEvent } from '@aptabase/react-native';
 
+import useSound from '../../hooks/useSound';
+
 export default function FinishCard() {
   const { state, dispatch } = useAppContext();
+  const { playSoundEffect } = useSound();
   const router = useRouter();
 
   const questionsLength = state.quizData?.results.length;
@@ -31,6 +34,7 @@ export default function FinishCard() {
   }
 
   function animation() {
+    soundEffect();
     if (percentageOfCorrectAnswers >= 75) {
       return ANIMATIONS.throphyAnimation;
     }
@@ -40,6 +44,18 @@ export default function FinishCard() {
     }
 
     return ANIMATIONS.sadEmoji;
+  }
+
+  function soundEffect() {
+    if (percentageOfCorrectAnswers >= 75) {
+      playSoundEffect(SOUNDS.greatScore);
+    }
+
+    if (percentageOfCorrectAnswers > 45 && percentageOfCorrectAnswers < 75) {
+      playSoundEffect(SOUNDS.goodScore);
+    }
+
+    playSoundEffect(SOUNDS.badScore);
   }
 
   return (

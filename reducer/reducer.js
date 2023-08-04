@@ -110,6 +110,8 @@ const reducer = (state, action) => {
         error: { ...state.error, message: '' },
         modalVisible: false,
       };
+    case 'SET_CURRENT_MUSIC':
+      return { ...state, currentMusic: action.payload };
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
   }

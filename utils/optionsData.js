@@ -26,4 +26,35 @@ const NUM_OF_QUESTIONS_OPTIONS = [
   },
 ];
 
-export { DIFFICULTY_OPTIONS, NUM_OF_QUESTIONS_OPTIONS };
+const BACKGROUND_MUSIC_OPTIONS = [
+  {
+    id: 1,
+    text: 'on',
+    category: 'backgroundMusic',
+  },
+  {
+    id: 2,
+    text: 'off',
+    category: 'backgroundMusic',
+  },
+];
+
+const SOUND_EFFECTS_OPTIONS = [
+  {
+    id: 1,
+    text: 'on',
+    category: 'soundEffects',
+  },
+  {
+    id: 2,
+    text: 'off',
+    category: 'soundEffects',
+  },
+];
+
+export {
+  DIFFICULTY_OPTIONS,
+  NUM_OF_QUESTIONS_OPTIONS,
+  BACKGROUND_MUSIC_OPTIONS,
+  SOUND_EFFECTS_OPTIONS,
+};

@@ -1,4 +1,3 @@
-import { View } from 'react-native';
 import Animated, { BounceInLeft, SlideOutRight } from 'react-native-reanimated';
 
 import { styles } from './loadingScreen.styles';
@@ -6,12 +5,10 @@ import { styles } from './loadingScreen.styles';
 import Lottie from 'lottie-react-native';
 import { ANIMATIONS } from '../../constants';
 
-export default function LoadingScreen() {
-  function getRandomNumber() {
-    return Math.floor(Math.random() * 3) + 1;
-  }
+import { getRandomNumber } from '../../utils/functions';
 
-  const random = getRandomNumber();
+export default function LoadingScreen() {
+  const random = getRandomNumber(3);
 
   return (
     <Animated.View

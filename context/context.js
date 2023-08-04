@@ -4,6 +4,8 @@ import reducer from '../reducer/reducer';
 import {
   DEFAULT_NUM_OF_QUESTIONS,
   DEFAULT_QUESTION_DIFFICULTY,
+  DEFAULT_BACKGROUND_MUSIC,
+  DEFAULT_SOUND_EFFECTS,
 } from '../utils/defaults';
 
 const AppContext = createContext();
@@ -15,6 +17,8 @@ const initialState = {
   userPreferences: {
     difficulty: DEFAULT_QUESTION_DIFFICULTY,
     numOfQuestions: DEFAULT_NUM_OF_QUESTIONS,
+    backgroundMusic: DEFAULT_BACKGROUND_MUSIC,
+    soundEffects: DEFAULT_SOUND_EFFECTS,
   },
   currentSubject: null,
   points: 0,
@@ -31,6 +35,7 @@ const initialState = {
   gamesPlayed: 0,
   totalCorrectAnswers: 0,
   totalWrongAnswers: 0,
+  currentMusic: null,
 };
 
 function ContextProvider({ children }) {

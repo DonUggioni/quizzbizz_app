@@ -16,6 +16,8 @@ import PointsDisplay from '../pointsDisplay/PointsDisplay';
 import useFetch from '../../hooks/useFetch';
 import { trackEvent } from '@aptabase/react-native';
 
+import useSound from '../../hooks/useSound';
+
 export default function SubjectList() {
   const { fetchQuestions } = useFetch();
   const { dispatch, state } = useAppContext();

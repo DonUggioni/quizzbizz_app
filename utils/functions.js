@@ -32,6 +32,11 @@ async function getData(endpoint, params) {
   }
 }
 
+// A simple function to generate a random number between 1 and whatever number passed as a param to it.
+function getRandomNumber(num) {
+  return Math.floor(Math.random() * num) + 1;
+}
+
 // Calculates the percentage of correct answers, takes in the number of correct answers and total number of questions.
 function calculatePercentage(correctAnswers, totalNumOfQuestions) {
   const percentage = (correctAnswers / totalNumOfQuestions) * 100;
@@ -91,4 +96,5 @@ export {
   calculateAveragePercentage,
   generateRandomUsername,
   translateFirebaseError,
+  getRandomNumber,
 };
