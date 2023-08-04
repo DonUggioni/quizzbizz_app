@@ -14,7 +14,7 @@ export default function PointsDisplay() {
       )}
     >
       <Text style={styles.heading}>Total points</Text>
-      <Text style={styles.points}>{state?.totalPoints}</Text>
+      <Text style={styles.points}>{state?.totalPoints.toLocaleString()}</Text>
     </Animated.View>
   );
 }

@@ -37,7 +37,6 @@ export default function Options() {
     switch (data.category) {
       case 'difficulty':
         return setUserSettings({ ...userSettings, difficulty: data.text });
-
       case 'numOfQuestions':
         return setUserSettings({ ...userSettings, numOfQuestions: data.text });
       case 'backgroundMusic':

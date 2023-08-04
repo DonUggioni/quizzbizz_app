@@ -32,6 +32,7 @@ export default function SubjectList() {
 
   function submitHandler() {
     trackEvent('clicked', { button: 'start_game' });
+    trackEvent('category_played', { category: state.currentSubject.name });
 
     const params = {
       amount: state?.userPreferences.numOfQuestions,

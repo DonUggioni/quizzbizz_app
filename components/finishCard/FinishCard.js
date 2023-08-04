@@ -48,14 +48,14 @@ export default function FinishCard() {
 
   function soundEffect() {
     if (percentageOfCorrectAnswers >= 75) {
-      playSoundEffect(SOUNDS.greatScore);
+      return playSoundEffect(SOUNDS.greatScore);
     }
 
     if (percentageOfCorrectAnswers > 45 && percentageOfCorrectAnswers < 75) {
-      playSoundEffect(SOUNDS.goodScore);
+      return playSoundEffect(SOUNDS.goodScore);
     }
 
-    playSoundEffect(SOUNDS.badScore);
+    return playSoundEffect(SOUNDS.badScore);
   }
 
   return (
