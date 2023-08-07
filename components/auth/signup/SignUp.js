@@ -42,17 +42,17 @@ export default function SignUp() {
 
     if (!isValid) {
       dispatch({
-        type: 'SHOW_ERROR',
+        type: 'SHOW_MESSAGE',
         payload: 'Please enter a valid email address.',
       });
     } else if (inputValues.password.length < 8) {
       dispatch({
-        type: 'SHOW_ERROR',
+        type: 'SHOW_MESSAGE',
         payload: 'Password must contain at least 8 characters.',
       });
     } else if (inputValues.password !== inputValues.confirmPassword) {
       dispatch({
-        type: 'SHOW_ERROR',
+        type: 'SHOW_MESSAGE',
         payload: "Passwords don't match.",
       });
     } else {

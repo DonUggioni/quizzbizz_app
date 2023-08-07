@@ -4,6 +4,7 @@ import {
   signInWithCredential,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  sendEmailVerification,
 } from 'firebase/auth';
 import * as Google from 'expo-auth-session/providers/google';
 import { auth } from '../firebase/config';
@@ -34,7 +35,7 @@ function useAuth() {
       dispatch({ type: 'SET_USER', payload: user.user });
     } catch (error) {
       console.log('error:', error.message);
-      dispatch({ type: 'SHOW_ERROR', payload: error.message });
+      dispatch({ type: 'SHOW_MESSAGE', payload: error.message });
     }
   };
 
@@ -45,7 +46,7 @@ function useAuth() {
       router.replace('/home');
     } catch (error) {
       console.log('error:', error.message);
-      dispatch({ type: 'SHOW_ERROR', payload: error.message });
+      dispatch({ type: 'SHOW_MESSAGE', payload: error.message });
     }
   };
 

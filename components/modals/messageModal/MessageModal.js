@@ -27,7 +27,7 @@ export default function MessageModal({ visible, onDismiss }) {
             mode='contained'
             style={styles.btnStay}
             labelStyle={styles.btnText}
-            onPress={() => dispatch({ type: 'HIDE_ERROR' })}
+            onPress={() => dispatch({ type: 'HIDE_MESSAGE' })}
           >
             Okay!
           </Button>

@@ -22,7 +22,7 @@ export default function index() {
   }
 
   function dismissHandler() {
-    dispatch({ type: 'HIDE_ERROR' });
+    dispatch({ type: 'HIDE_MESSAGE' });
   }
 
   return (

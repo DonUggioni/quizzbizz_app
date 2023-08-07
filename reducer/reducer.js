@@ -98,13 +98,13 @@ const reducer = (state, action) => {
         totalWrongAnswers: 0,
         currentSubject: null,
       };
-    case 'SHOW_ERROR':
+    case 'SHOW_MESSAGE':
       return {
         ...state,
         error: { ...state.error, message: action.payload },
         modalVisible: true,
       };
-    case 'HIDE_ERROR':
+    case 'HIDE_MESSAGE':
       return {
         ...state,
         error: { ...state.error, message: '' },
