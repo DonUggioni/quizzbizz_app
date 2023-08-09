@@ -63,6 +63,7 @@ export default function FinishCard() {
       <View style={styles.container}>
         <Animated.View entering={BounceInUp} style={styles.statsContainer}>
           <Lottie
+            testID='LottieAnimation'
             source={animation()}
             style={styles.animationSize}
             autoPlay

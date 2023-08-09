@@ -1,10 +1,7 @@
 import { Text, View } from 'react-native';
 import { Modal, Portal, Button } from 'react-native-paper';
-
 import { styles } from './messageModal.styles';
-
 import { useAppContext } from '../../../context/context';
-
 import { translateFirebaseError } from '../../../utils/functions';
 
 export default function MessageModal({ visible, onDismiss }) {
