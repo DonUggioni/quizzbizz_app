@@ -7,6 +7,17 @@
     "userInterfaceStyle": "light",
     "backgroundColor": "#001524",
     "icon": "./assets/images/Icon.png",
+    "plugins": [
+      "expo-localization",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "extraProguardRules": "-keep class com.google.android.gms.internal.consent_sdk.** { *; }"
+          }
+        }
+      ]
+    ],
     "web": {
       "bundler": "metro"
     },
@@ -31,10 +42,10 @@
     "sdkVersion": "48.0.0",
     "platforms": ["ios", "android", "web"],
     "currentFullName": "@donuggioni/quiz-me-app",
-    "originalFullName": "@donuggioni/quiz-me-app",
-    "plugins": ["expo-localization"]
+    "originalFullName": "@donuggioni/quiz-me-app"
   },
   "react-native-google-mobile-ads": {
-    "android_app_id": "ca-app-pub-6155362875273384~2154795242"
+    "android_app_id": "ca-app-pub-6155362875273384~2154795242",
+    "delay_app_measurement_init": true
   }
 }
