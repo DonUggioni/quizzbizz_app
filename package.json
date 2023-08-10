@@ -12,7 +12,7 @@
       "@testing-library/jest-native/extend-expect"
     ],
     "transformIgnorePatterns": [
-      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)"
+      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg|firebase/firestore)"
     ],
     "transform": {
       "\\.(mp3)$": "jest-transform-stub",
@@ -54,6 +54,7 @@
     "react-dom": "18.2.0",
     "react-native": "0.71.8",
     "react-native-gesture-handler": "~2.9.0",
+    "react-native-google-mobile-ads": "^11.7.0",
     "react-native-paper": "^5.9.0",
     "react-native-reanimated": "~2.14.4",
     "react-native-safe-area-context": "^4.5.0",

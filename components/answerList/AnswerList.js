@@ -23,7 +23,7 @@ import {
   HARD_QUESTION_POINTS,
 } from '../../utils/defaults';
 
-export default function QuestionList() {
+export default function AnswerList() {
   const [choosenAnswer, setChoosenAnswer] = useState(null);
   const [answerStyle, setAnswerStyle] = useState('');
   const router = useRouter();
