@@ -25,7 +25,6 @@ import {
   AdsConsentDebugGeography,
   AdsConsentStatus,
 } from 'react-native-google-mobile-ads';
-// import { getDeviceId } from 'react-native-device-info';
 
 import { DUMMY_AVATAR_URL } from '../utils/defaults';
 
@@ -77,8 +76,11 @@ function RootApp() {
   }, []);
 
   useEffect(() => {
+    dispatch({ type: 'SHOW_LOADING_SCREEN' });
     // Checking if there is a logged in user
-    if (state?.user !== null) return;
+    if (state?.user !== null) {
+      return dispatch({ type: 'HIDE_LOADING_SCREEN' });
+    }
 
     const unsub = onAuthStateChanged(auth, async (user) => {
       if (user) {
@@ -104,7 +106,6 @@ function RootApp() {
             updateProfile(auth.currentUser, {
               displayName: randomUsername,
             });
-            console.log('username created');
           } catch (error) {
             console.log('display name error', error.message);
           }
@@ -119,6 +120,7 @@ function RootApp() {
         // Checking if user info exists on DB, if not, it will be created.
         if (docSnap.exists()) {
           const data = docSnap.data();
+
           dispatch({
             type: 'SET_USER_INFO',
             payload: data,
@@ -131,6 +133,7 @@ function RootApp() {
         console.log('No user');
       }
     });
+    dispatch({ type: 'HIDE_LOADING_SCREEN' });
 
     return () => unsub();
   }, [state.user]);

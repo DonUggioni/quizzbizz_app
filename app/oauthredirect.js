@@ -12,8 +12,8 @@ export default function oauthredirect() {
   const router = useRouter();
 
   setTimeout(() => {
-    router.replace('/home');
-  }, 2500);
+    router.back();
+  }, 3500);
 
   return (
     <View style={styles.container}>

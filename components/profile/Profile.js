@@ -23,6 +23,7 @@ export default function Profile() {
   );
 
   async function signOutHandler() {
+    dispatch({ type: 'SHOW_LOADING_SCREEN' });
     try {
       await signOut(auth);
       await AsyncStorage.removeItem('@QuizMeData');
@@ -30,17 +31,22 @@ export default function Profile() {
       dispatch({ type: 'SIGN_OUT' });
     } catch (error) {
       console.log(error);
+    } finally {
+      dispatch({ type: 'HIDE_LOADING_SCREEN' });
     }
   }
 
   async function deleteUserHandler() {
+    dispatch({ type: 'SHOW_LOADING_SCREEN' });
+
     try {
       await deleteUser(auth.currentUser);
       await AsyncStorage.removeItem('@QuizMeData');
-      router.replace('/home');
       dispatch({ type: 'SIGN_OUT' });
     } catch (error) {
       console.log(error.message);
+    } finally {
+      dispatch({ type: 'HIDE_LOADING_SCREEN' });
     }
   }
 

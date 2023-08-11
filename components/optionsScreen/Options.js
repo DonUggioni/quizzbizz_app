@@ -20,15 +20,20 @@ import { useRouter } from 'expo-router';
 
 import { useAppContext } from '../../context/context';
 import { capitalizeFirstChar } from '../../utils/functions';
+import {
+  DEFAULT_BACKGROUND_MUSIC,
+  DEFAULT_SOUND_EFFECTS,
+} from '../../utils/defaults';
 
 export default function Options() {
   const router = useRouter();
   const { state, dispatch } = useAppContext();
   const [userSettings, setUserSettings] = useState({
-    difficulty: state?.userPreferences.difficulty,
-    numOfQuestions: state?.userPreferences.numOfQuestions,
-    backgroundMusic: state.userPreferences.backgroundMusic,
-    soundEffects: state.userPreferences.soundEffects,
+    difficulty: state.userPreferences.difficulty,
+    numOfQuestions: state.userPreferences.numOfQuestions,
+    backgroundMusic:
+      state.userPreferences.backgroundMusic || DEFAULT_BACKGROUND_MUSIC,
+    soundEffects: state.userPreferences.soundEffects || DEFAULT_SOUND_EFFECTS,
   });
   const [isSaving, setIsSaving] = useState(false);
 
@@ -86,7 +91,7 @@ export default function Options() {
           title={'Select a default question difficulty level'}
           onSelected={onSelect}
           currentValue={
-            state?.userPreferences.difficulty !== null &&
+            state?.userPreferences.difficulty !== undefined &&
             capitalizeFirstChar(state?.userPreferences.difficulty)
           }
         />
@@ -94,23 +99,27 @@ export default function Options() {
           data={NUM_OF_QUESTIONS_OPTIONS}
           title={'Select the number of questions per game'}
           onSelected={onSelect}
-          currentValue={state?.userPreferences.numOfQuestions}
+          currentValue={state.userPreferences.numOfQuestions}
         />
         <Selector
           data={BACKGROUND_MUSIC_OPTIONS}
           title={'Background music'}
           onSelected={onSelect}
-          currentValue={capitalizeFirstChar(
-            state?.userPreferences.backgroundMusic
-          )}
+          currentValue={
+            (state?.userPreferences.backgroundMusic !== undefined &&
+              capitalizeFirstChar(state.userPreferences.backgroundMusic)) ||
+            capitalizeFirstChar(DEFAULT_BACKGROUND_MUSIC)
+          }
         />
         <Selector
           data={SOUND_EFFECTS_OPTIONS}
           title={'Sound effects'}
           onSelected={onSelect}
-          currentValue={capitalizeFirstChar(
-            state?.userPreferences.soundEffects
-          )}
+          currentValue={
+            (state?.userPreferences.soundEffects !== undefined &&
+              capitalizeFirstChar(state.userPreferences.soundEffects)) ||
+            capitalizeFirstChar(DEFAULT_SOUND_EFFECTS)
+          }
         />
       </ScrollView>
       <View style={styles.btnContainer}>

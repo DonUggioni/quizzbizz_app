@@ -12,7 +12,6 @@ const adUnitId = __DEV__ ? TestIds.INTERSTITIAL : HOME_INTERSTITIAL_UNIT_ID;
 
 const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
   requestNonPersonalizedAdsOnly: true,
-  keywords: ['fashion', 'clothing'],
 });
 
 function useAd() {

@@ -8,12 +8,10 @@ import {
 } from 'firebase/auth';
 import * as Google from 'expo-auth-session/providers/google';
 import { auth } from '../firebase/config';
-import { useRouter } from 'expo-router';
 import { useAppContext } from '../context/context';
 
 function useAuth() {
   const { dispatch } = useAppContext();
-  const router = useRouter();
 
   const [_, googleResponse, googlePromptAsync] = Google.useAuthRequest({
     iosClientId: `${process.env.IOS_CLIENT_ID}`,
@@ -29,24 +27,31 @@ function useAuth() {
   }, [googleResponse]);
 
   const createUser = async (email, password) => {
+    dispatch({ type: 'SHOW_LOADING_SCREEN' });
     try {
       const user = await createUserWithEmailAndPassword(auth, email, password);
-      router.replace('/home');
       dispatch({ type: 'SET_USER', payload: user.user });
     } catch (error) {
       console.log('error:', error.message);
       dispatch({ type: 'SHOW_MESSAGE', payload: error.message });
+    } finally {
+      setTimeout(() => {
+        dispatch({ type: 'HIDE_LOADING_SCREEN' });
+      }, 2000);
     }
   };
 
   const signinUser = async (email, password) => {
+    dispatch({ type: 'SHOW_LOADING_SCREEN' });
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      console.log('user signedin');
-      router.replace('/home');
     } catch (error) {
       console.log('error:', error.message);
       dispatch({ type: 'SHOW_MESSAGE', payload: error.message });
+    } finally {
+      setTimeout(() => {
+        dispatch({ type: 'HIDE_LOADING_SCREEN' });
+      }, 2000);
     }
   };
 
