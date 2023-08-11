@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { View, Text } from 'react-native';
 import { styles } from './finishCard.styles';
 
@@ -29,8 +30,10 @@ export default function FinishCard() {
 
   function restartQuiz() {
     trackEvent('clicked', { button: 'play_again' });
+
     dispatch({ type: 'RESTART' });
     router.replace('/home');
+    // playAd();
   }
 
   function animation() {
@@ -46,7 +49,7 @@ export default function FinishCard() {
     return ANIMATIONS.sadEmoji;
   }
 
-  function soundEffect() {
+  const soundEffect = useCallback(() => {
     if (percentageOfCorrectAnswers >= 75) {
       return playSoundEffect(SOUNDS.greatScore);
     }
@@ -56,7 +59,7 @@ export default function FinishCard() {
     }
 
     return playSoundEffect(SOUNDS.badScore);
-  }
+  }, []);
 
   return (
     <>

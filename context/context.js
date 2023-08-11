@@ -36,6 +36,7 @@ const initialState = {
   totalCorrectAnswers: 0,
   totalWrongAnswers: 0,
   currentMusic: null,
+  adIsLoaded: false,
 };
 
 function ContextProvider({ children }) {

@@ -6,6 +6,12 @@ export const styles = StyleSheet.create({
     width: '100%',
     flex: 1,
   },
+  addContainer: {
+    width: '100%',
+    height: 40,
+    alignItems: 'center',
+    marginTop: MARGIN.small,
+  },
   heading: {
     fontSize: SIZES.xLarge,
     color: COLORS.white,

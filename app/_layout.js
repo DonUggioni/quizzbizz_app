@@ -19,11 +19,15 @@ import { StatusBar } from 'expo-status-bar';
 
 import { init } from '@aptabase/react-native';
 
+import { trackEvent } from '@aptabase/react-native';
+
 import { DUMMY_AVATAR_URL } from '../utils/defaults';
 
 init(process.env.APTABASE_APP_KEY);
 
 function RootApp() {
+  trackEvent('app_started');
+
   const { state, dispatch } = useAppContext();
   const { fetchSubjectList } = useFetch();
   const [isLoading, setIsLoading] = useState(true);

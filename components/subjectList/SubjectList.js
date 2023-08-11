@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { View, Text, FlatList } from 'react-native';
 
 import { ICONS, MARGIN } from '../../constants';
@@ -14,10 +14,19 @@ import Animated, { FadeInDown } from 'react-native-reanimated';
 import PointsDisplay from '../pointsDisplay/PointsDisplay';
 
 import useFetch from '../../hooks/useFetch';
+import useAd from '../../hooks/useAd';
 import { trackEvent } from '@aptabase/react-native';
+
+import {
+  BannerAd,
+  BannerAdSize,
+  TestIds,
+} from 'react-native-google-mobile-ads';
+const adUnitId = __DEV__ ? TestIds.GAM_BANNER : '/xxx/yyyy';
 
 export default function SubjectList() {
   const { fetchQuestions } = useFetch();
+  const { playAd } = useAd();
   const { dispatch, state } = useAppContext();
 
   function handleCardPress(item) {
@@ -28,12 +37,18 @@ export default function SubjectList() {
     return <LoadingScreen />;
   }, [state.isLoading]);
 
+  useEffect(() => {
+    if (!state.adIsLoaded) return;
+
+    playAd();
+  }, [state.adIsLoaded]);
+
   function submitHandler() {
     trackEvent('clicked', { button: 'start_game' });
     trackEvent('category_played', { category: state.currentSubject.name });
 
     const params = {
-      amount: state?.userPreferences.numOfQuestions,
+      amount: state.userPreferences.numOfQuestions,
       category: state.currentSubject.id,
     };
 
@@ -41,7 +56,7 @@ export default function SubjectList() {
       params.difficulty = state?.userPreferences.difficulty;
     }
 
-    // This hook is handling the routing after fetching the questions
+    // It's listening to the insterstitial, when the add is closed by the user, it will trigger fetchQuestions
     fetchQuestions('api.php', params);
   }
 
@@ -74,6 +89,15 @@ export default function SubjectList() {
 
   return (
     <View style={styles.container}>
+      <View style={styles.addContainer}>
+        <BannerAd
+          unitId={adUnitId}
+          size={BannerAdSize.BANNER}
+          requestOptions={{
+            requestNonPersonalizedAdsOnly: true,
+          }}
+        />
+      </View>
       {state.user !== null && <PointsDisplay />}
       <Text
         style={[

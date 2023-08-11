@@ -112,6 +112,8 @@ const reducer = (state, action) => {
       };
     case 'SET_CURRENT_MUSIC':
       return { ...state, currentMusic: action.payload };
+    case 'SET_AD_IS_LOADED':
+      return { ...state, adIsLoaded: action.payload };
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
   }

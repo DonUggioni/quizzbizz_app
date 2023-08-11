@@ -7,14 +7,11 @@ import { PaperProvider } from 'react-native-paper';
 import { getRandomNumber } from '../utils/functions';
 import { useAppContext } from '../context/context';
 
-import { trackEvent } from '@aptabase/react-native';
-
 import useSound from '../hooks/useSound';
 
 import { SOUNDS } from '../constants';
 
 export default function Home() {
-  trackEvent('homepage_visited');
   const { playMusic, stopMusic } = useSound();
   const { state } = useAppContext();
 
