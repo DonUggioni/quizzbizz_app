@@ -17,12 +17,15 @@ import useFetch from '../../hooks/useFetch';
 import useAd from '../../hooks/useAd';
 import { trackEvent } from '@aptabase/react-native';
 
+import { HOME_BANNER_UNIT_ID } from '../../utils/defaults';
+
 import {
   BannerAd,
   BannerAdSize,
   TestIds,
 } from 'react-native-google-mobile-ads';
-const adUnitId = __DEV__ ? TestIds.GAM_BANNER : '/xxx/yyyy';
+
+const adUnitId = __DEV__ ? TestIds.GAM_BANNER : HOME_BANNER_UNIT_ID;
 
 export default function SubjectList() {
   const { fetchQuestions } = useFetch();
@@ -40,7 +43,9 @@ export default function SubjectList() {
   useEffect(() => {
     if (!state.adIsLoaded) return;
 
-    playAd();
+    setTimeout(() => {
+      playAd();
+    }, 2500);
   }, [state.adIsLoaded]);
 
   function submitHandler() {

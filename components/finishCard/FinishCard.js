@@ -6,6 +6,8 @@ import { ANIMATIONS, SOUNDS } from '../../constants';
 import Lottie from 'lottie-react-native';
 
 import { useAppContext } from '../../context/context';
+import useSound from '../../hooks/useSound';
+
 import { calculatePercentage } from '../../utils/functions';
 import ActionButton from '../actionButton/ActionButton';
 
@@ -13,8 +15,6 @@ import { useRouter } from 'expo-router';
 
 import Animated, { BounceInUp, FadeInDown } from 'react-native-reanimated';
 import { trackEvent } from '@aptabase/react-native';
-
-import useSound from '../../hooks/useSound';
 
 export default function FinishCard() {
   const { state, dispatch } = useAppContext();
@@ -33,7 +33,6 @@ export default function FinishCard() {
 
     dispatch({ type: 'RESTART' });
     router.replace('/home');
-    // playAd();
   }
 
   function animation() {

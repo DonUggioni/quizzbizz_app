@@ -18,8 +18,14 @@ import { generateRandomUsername } from '../utils/functions';
 import { StatusBar } from 'expo-status-bar';
 
 import { init } from '@aptabase/react-native';
-
 import { trackEvent } from '@aptabase/react-native';
+
+import {
+  AdsConsent,
+  AdsConsentDebugGeography,
+  AdsConsentStatus,
+} from 'react-native-google-mobile-ads';
+// import { getDeviceId } from 'react-native-device-info';
 
 import { DUMMY_AVATAR_URL } from '../utils/defaults';
 
@@ -27,11 +33,11 @@ init(process.env.APTABASE_APP_KEY);
 
 function RootApp() {
   trackEvent('app_started');
-
   const { state, dispatch } = useAppContext();
   const { fetchSubjectList } = useFetch();
   const [isLoading, setIsLoading] = useState(true);
   const randomUsername = generateRandomUsername();
+  // const deviceId = getDeviceId();
 
   let userData = {
     userPreferences: state?.userPreferences,
@@ -45,12 +51,33 @@ function RootApp() {
   };
 
   useEffect(() => {
+    // Getting consent from the user according to the GDPR laws in EEU.
+    const getConsent = async () => {
+      const consentInfo = await AdsConsent.requestInfoUpdate({
+        debugGeography: AdsConsentDebugGeography.EEA,
+        testDeviceIdentifiers: ['351515119638544/54', '351515119638542/54'],
+      });
+
+      if (
+        consentInfo.isConsentFormAvailable &&
+        consentInfo.status === AdsConsentStatus.REQUIRED
+      ) {
+        const { status } = await AdsConsent.showForm();
+      }
+    };
+
+    getConsent();
+  }, []);
+
+  useEffect(() => {
+    // Fetching the subject list from the API on app load
     if (state.subjectList.length > 0) return;
 
     fetchSubjectList('api_category.php');
   }, []);
 
   useEffect(() => {
+    // Checking if there is a logged in user
     if (state?.user !== null) return;
 
     const unsub = onAuthStateChanged(auth, async (user) => {

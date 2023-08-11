@@ -6,7 +6,7 @@ import { useAppContext } from '../../../context/context';
 
 import { useRouter } from 'expo-router';
 
-const TIME_PER_QUESTION = 30000;
+import { TIME_PER_QUESTION } from '../../../utils/defaults';
 
 export default function ProgressBar() {
   const router = useRouter();
