@@ -8,8 +8,6 @@ Welcome to QuizzBizz, the app that takes you on an exciting quiz adventure like 
 
 - Customizable Games: Tailor the quizzes to match your preferences! Select from a diverse range of topics, adjust difficulty and more.
 
-- Leaderboards: Ready to test your skills against others? Climb the global leaderboards and see where you stand among the best quizzers from around the world. (Under construction).
-
 - Endless Quizzes: With a constantly expanding collection of quizzes covering various subjects, there's always something new to discover and learn.
 
 ## Get started
@@ -34,3 +32,6 @@ Welcome to QuizzBizz, the app that takes you on an exciting quiz adventure like 
 
 ## Screenshots
 ![Grouped_Screenshots](https://github.com/DonUggioni/quizzbizz_app/assets/99286931/9d18d3ae-0ae4-46de-b2dc-91778b75dbe9)
+
+## Coming features
+- Leaderboards.
