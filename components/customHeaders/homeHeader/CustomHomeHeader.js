@@ -3,11 +3,22 @@ import { View, Text } from 'react-native';
 import { styles } from './customHomeHeader.styles';
 import { ICONS } from '../../../constants';
 import HeaderIcon from '../../headerIcon/HeaderIcon';
+import { trackEvent } from '@aptabase/react-native';
 
 import { useRouter } from 'expo-router';
 
 export default function CustomHomeHeader() {
   const router = useRouter();
+
+  function optionsHandler() {
+    trackEvent('options window viewed');
+    router.push('/options');
+  }
+
+  function profileHandler() {
+    trackEvent('profile window viewed');
+    router.push('/profile');
+  }
 
   return (
     <View style={styles.container}>
@@ -15,7 +26,7 @@ export default function CustomHomeHeader() {
         source={ICONS.settingsIcon}
         btnWidth={30}
         btnHeight={30}
-        onPress={() => router.push('/options')}
+        onPress={() => optionsHandler()}
       />
       <Text style={styles.heading}>QuizzBizz</Text>
       <HeaderIcon
@@ -23,7 +34,7 @@ export default function CustomHomeHeader() {
         btnWidth={35}
         btnHeight={35}
         style={{ paddingTop: 12 }}
-        onPress={() => router.push('/profile')}
+        onPress={() => profileHandler()}
       />
     </View>
   );
