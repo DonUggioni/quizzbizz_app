@@ -79,6 +79,7 @@ const reducer = (state, action) => {
         totalCorrectAnswers: action.payload.totalCorrectAnswers,
         totalWrongAnswers: action.payload.totalWrongAnswers,
         gamesPlayed: action.payload.gamesPlayed,
+        photoURL: action.payload.photoURL,
       };
     case 'SIGN_OUT':
       return {

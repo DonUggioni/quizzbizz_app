@@ -4,10 +4,12 @@ import { styles } from './customHomeHeader.styles';
 import { ICONS } from '../../../constants';
 import HeaderIcon from '../../headerIcon/HeaderIcon';
 import { trackEvent } from '@aptabase/react-native';
+import { useAppContext } from '../../../context/context';
 
 import { useRouter } from 'expo-router';
 
 export default function CustomHomeHeader() {
+  const { state } = useAppContext();
   const router = useRouter();
 
   function optionsHandler() {
@@ -30,7 +32,9 @@ export default function CustomHomeHeader() {
       />
       <Text style={styles.heading}>QuizzBizz</Text>
       <HeaderIcon
-        source={ICONS.profileIcon}
+        source={
+          state.user !== null ? { uri: state.photoURL } : ICONS.profileIcon
+        }
         btnWidth={35}
         btnHeight={35}
         style={{ paddingTop: 12 }}

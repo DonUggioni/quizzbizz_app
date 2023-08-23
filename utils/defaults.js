@@ -1,4 +1,4 @@
-const DUMMY_AVATAR_URL = 'https://i.pravatar.cc/100';
+const DUMMY_AVATAR_URL = `${process.env.DUMMY_AVATAR_URL}`;
 const DEFAULT_NUM_OF_QUESTIONS = 15;
 const DEFAULT_QUESTION_DIFFICULTY = 'any';
 const EASY_QUESTION_POINTS = 10;

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import he from 'he';
 import { useRouter } from 'expo-router';
 
@@ -121,17 +121,19 @@ export default function AnswerList() {
 
   return (
     <View style={styles.container}>
-      {shuffledAnswers?.map((answer, index) => {
-        return (
-          <AnswerCard
-            question={he.decode(answer)}
-            key={answer}
-            onPress={() => setChoosenAnswer(answer)}
-            isActive={answer === choosenAnswer}
-            answerStyle={answerStyle[index]}
-          />
-        );
-      })}
+      <ScrollView style={{ width: '100%' }}>
+        {shuffledAnswers?.map((answer, index) => {
+          return (
+            <AnswerCard
+              question={he.decode(answer)}
+              key={answer}
+              onPress={() => setChoosenAnswer(answer)}
+              isActive={answer === choosenAnswer}
+              answerStyle={answerStyle[index]}
+            />
+          );
+        })}
+      </ScrollView>
       <ActionButton
         text={
           state.quizData.results?.length === state?.index + 1

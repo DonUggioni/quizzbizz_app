@@ -4,7 +4,6 @@ import {
   signInWithCredential,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  sendEmailVerification,
 } from 'firebase/auth';
 import * as Google from 'expo-auth-session/providers/google';
 import { auth } from '../firebase/config';

@@ -45,7 +45,7 @@ export default function SubjectList() {
 
     setTimeout(() => {
       playAd();
-    }, 2500);
+    }, 1800);
   }, [state.adIsLoaded]);
 
   function submitHandler() {

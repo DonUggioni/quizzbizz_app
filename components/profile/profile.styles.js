@@ -7,6 +7,19 @@ export const styles = StyleSheet.create({
     padding: PADDING.large,
     justifyContent: 'space-between',
   },
+  usernameContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  heading: {
+    fontSize: SIZES.large,
+    fontFamily: FONT.semiBold,
+    letterSpacing: 0.5,
+    color: COLORS.white,
+    marginTop: MARGIN.medium,
+    marginBottom: MARGIN.small,
+  },
   text: {
     fontFamily: FONT.regular,
     fontSize: SIZES.medium,

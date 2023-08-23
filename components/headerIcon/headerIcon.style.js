@@ -11,5 +11,6 @@ export const styles = StyleSheet.create({
   btnImage: (width, height) => ({
     width: width,
     height: height,
+    borderRadius: 50,
   }),
 });

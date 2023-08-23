@@ -17,13 +17,14 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   imgContainer: {
-    width: 30,
-    height: 30,
+    width: 35,
+    height: 35,
     marginRight: MARGIN.large,
   },
   img: {
     width: '100%',
     height: '100%',
+    borderRadius: 50,
   },
   title: {
     color: COLORS.white,

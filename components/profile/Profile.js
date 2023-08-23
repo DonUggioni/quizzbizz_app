@@ -12,6 +12,7 @@ import { useRouter } from 'expo-router';
 import { calculateAveragePercentage } from '../../utils/functions';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { COLORS } from '../../constants';
 
 export default function Profile() {
   const router = useRouter();
@@ -53,11 +54,23 @@ export default function Profile() {
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.text}>
-          Username:{' '}
-          {state?.displayName ? state.displayName : state.user.displayName}
-        </Text>
-        <Text style={styles.text}>Email: {state?.user.email}</Text>
+        <View style={styles.usernameContainer}>
+          <View>
+            <Text style={styles.text}>
+              Hello,{' '}
+              {state?.displayName ? state.displayName : state.user.displayName}
+            </Text>
+          </View>
+          <Button
+            icon={'pencil'}
+            contentStyle={styles.text}
+            textColor={COLORS.white}
+          >
+            Edit
+          </Button>
+        </View>
+
+        <Text style={styles.heading}>Your stats</Text>
         <Text style={styles.text}>Games played: {state?.gamesPlayed}</Text>
         <Text style={styles.text}>
           Correct answers: {state?.totalCorrectAnswers}
