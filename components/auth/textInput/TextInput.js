@@ -9,7 +9,7 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import { styles } from './textInput.styles';
-import { COLORS, ICONS, SIZES } from '../../../constants';
+import { COLORS, ICONS, SIZES } from '../../constants';
 
 function Input({
   onChangeText,

@@ -13,7 +13,6 @@ import { ICONS } from '../../constants';
 
 import { useAppContext } from '../../context/context';
 import { PaperProvider } from 'react-native-paper';
-import { DUMMY_AVATAR_URL } from '../../utils/defaults';
 
 export default function index() {
   const { state, dispatch } = useAppContext();

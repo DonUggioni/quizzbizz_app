@@ -65,6 +65,7 @@ export default function Profile() {
             icon={'pencil'}
             contentStyle={styles.text}
             textColor={COLORS.white}
+            onPress={() => router.push('/profileSettings')}
           >
             Edit
           </Button>
