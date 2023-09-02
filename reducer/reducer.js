@@ -111,6 +111,13 @@ const reducer = (state, action) => {
         error: { ...state.error, message: '' },
         modalVisible: false,
       };
+    case 'SHOW_SNACKBAR':
+      return {
+        ...state,
+        snackBar: { isVisible: true, message: action.payload },
+      };
+    case 'HIDE_SNACKBAR':
+      return { ...state, snackBar: { isVisible: false, message: '' } };
     case 'SET_CURRENT_MUSIC':
       return { ...state, currentMusic: action.payload };
     case 'SET_AD_IS_LOADED':

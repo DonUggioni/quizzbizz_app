@@ -52,4 +52,12 @@ export const styles = StyleSheet.create({
   semiBold: {
     fontFamily: FONT.semiBold,
   },
+  snackBarPosition: {
+    position: 'absolute',
+    top: MARGIN.xLarge,
+  },
+  snackBarStyling: {
+    backgroundColor: COLORS.green,
+    fontFamily: FONT.regular,
+  },
 });

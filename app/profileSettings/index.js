@@ -10,7 +10,6 @@ export default function ProfileSettings() {
     <View style={styles.container}>
       <Stack.Screen
         options={{
-          presentation: 'modal',
           headerShown: false,
         }}
       />

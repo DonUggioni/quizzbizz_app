@@ -29,6 +29,10 @@ const initialState = {
     error: false,
     message: '',
   },
+  snackBar: {
+    isVisible: false,
+    message: '',
+  },
   modalVisible: false,
   correctAnswers: 0,
   wrongAnswers: 0,
