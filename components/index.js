@@ -17,7 +17,6 @@ import Profile from './profile/Profile';
 import LoadingSpinner from './loadingSpinner/LoadingSpinner';
 import SplashScreen from './splashScreen/SplashScreen';
 import ProfileSettingsScreen from './profileSettingsScreen/ProfileSettingsScreen';
-import Input from './textInput/TextInput';
 
 export {
   CustomHomeHeader,
@@ -39,5 +38,4 @@ export {
   LoadingSpinner,
   SplashScreen,
   ProfileSettingsScreen,
-  Input,
 };

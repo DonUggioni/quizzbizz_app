@@ -38,7 +38,7 @@ export default function ProgressBar() {
 
   useEffect(() => {
     setTimerPercentage(100);
-    // timer();
+    timer();
 
     return () => {
       clearInterval(timeInterval);

@@ -35,7 +35,7 @@ export default function Options() {
       state.userPreferences.backgroundMusic || DEFAULT_BACKGROUND_MUSIC,
     soundEffects: state.userPreferences.soundEffects || DEFAULT_SOUND_EFFECTS,
   });
-  const [isSaving, setIsSaving] = useState(false);
+  // const [isSaving, setIsSaving] = useState(false);
 
   // This function is recieving the data coming from the "Selector" component, this way, you can updated the app state from here by pressing the Save button and dispatching an action
   function onSelect(data) {
@@ -54,7 +54,7 @@ export default function Options() {
   }
 
   async function saveHandler() {
-    setIsSaving(true);
+    dispatch({ type: 'SHOW_LOADING_SCREEN' });
     dispatch({ type: 'UPDATE_USER_PREFERENCES', payload: userSettings });
 
     try {
@@ -68,7 +68,7 @@ export default function Options() {
     } catch (error) {
       console.log(error.message);
     } finally {
-      setIsSaving(false);
+      dispatch({ type: 'HIDE_LOADING_SCREEN' });
       router.back();
     }
   }
@@ -139,7 +139,7 @@ export default function Options() {
           labelStyle={styles.btnText}
           rippleColor={'transparent'}
           onPress={() => saveHandler()}
-          loading={isSaving}
+          loading={state.isLoading}
         >
           Save
         </Button>

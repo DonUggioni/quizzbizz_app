@@ -19,6 +19,8 @@ export const styles = StyleSheet.create({
     width: 102,
     height: 102,
     borderRadius: 100,
+    borderWidth: 0.5,
+    borderColor: COLORS.white,
   },
   button: {
     fontSize: SIZES.medium,
@@ -28,19 +30,19 @@ export const styles = StyleSheet.create({
   usernameContainer: {
     alignItems: 'center',
     flexDirection: 'row',
+    justifyContent: 'space-around',
     borderBottomWidth: 1,
     borderColor: COLORS.secondary,
   },
   input: {
     height: 46,
-    width: '100%',
+    width: '85%',
     paddingHorizontal: PADDING.medium,
     paddingVertical: PADDING.small,
     color: COLORS.white,
     fontFamily: FONT.regular,
     letterSpacing: 0.5,
     fontSize: SIZES.medium,
-    flexBasis: '80%',
   },
   doneButton: {
     backgroundColor: COLORS.orange,

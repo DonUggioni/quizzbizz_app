@@ -9,9 +9,9 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import { styles } from './textInput.styles';
-import { COLORS, ICONS, SIZES } from '../../constants';
+import { COLORS, ICONS, SIZES } from '../../../constants';
 
-function Input({
+export default function Input({
   onChangeText,
   label,
   inputValue,
@@ -75,5 +75,3 @@ function Input({
     </View>
   );
 }
-
-export default Input;

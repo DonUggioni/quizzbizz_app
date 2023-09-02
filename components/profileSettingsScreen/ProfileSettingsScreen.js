@@ -1,22 +1,30 @@
+import { useState } from 'react';
 import { View, Image, TextInput } from 'react-native';
-
 import { styles } from './profileSettingsScreen.styles';
 import { useAppContext } from '../../context/context';
 import { Button } from 'react-native-paper';
-import { useState } from 'react';
 import { COLORS } from '../../constants';
 import { useRouter } from 'expo-router';
+import { doc, setDoc } from 'firebase/firestore';
+import { updateProfile } from 'firebase/auth';
+import { db, auth } from '../../firebase/config';
 
 export default function ProfileSettingsScreen() {
-  const { state } = useAppContext();
+  const { state, dispatch } = useAppContext();
   const router = useRouter();
-  const [username, setUsername] = useState(state.user.displayName);
+  const [displayName, setDisplayName] = useState(state.user.displayName);
 
-  function showUsernameSaveButton() {
-    if (username === state.user.displayName) {
-      return true;
-    } else {
-      return false;
+  async function saveUsernameHandler() {
+    dispatch({ type: 'SHOW_LOADING_SCREEN' });
+    try {
+      updateProfile(auth.currentUser, {
+        displayName: displayName,
+      });
+    } catch (error) {
+      console.log('Could not upload profile', error.message);
+      dispatch({});
+    } finally {
+      dispatch({ type: 'HIDE_LOADING_SCREEN' });
     }
   }
 
@@ -34,13 +42,15 @@ export default function ProfileSettingsScreen() {
         <View style={styles.usernameContainer}>
           <TextInput
             style={styles.input}
-            value={username}
-            onChangeText={(text) => setUsername(text)}
+            value={displayName}
+            onChangeText={(text) => setDisplayName(text)}
           />
           <Button
             textColor={COLORS.white}
             labelStyle={styles.button}
-            disabled={showUsernameSaveButton()}
+            disabled={displayName === state.user.displayName ? true : false}
+            onPress={() => saveUsernameHandler()}
+            loading={state.isLoading}
           >
             Save
           </Button>

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { View, Text } from 'react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 
-import Input from '../../textInput/TextInput';
+import Input from '../textInput/TextInput';
 
 import { styles } from './signIn.styles';
 
