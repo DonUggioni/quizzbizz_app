@@ -33,7 +33,7 @@ export default function CustomHomeHeader() {
       <Text style={styles.heading}>QuizzBizz</Text>
       <HeaderIcon
         source={
-          state.user !== null ? { uri: state.photoURL } : ICONS.profileIcon
+          state.user !== null ? { uri: state.user.photoURL } : ICONS.profileIcon
         }
         btnWidth={35}
         btnHeight={35}

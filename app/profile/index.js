@@ -35,7 +35,7 @@ export default function index() {
                 <SettingsHeader
                   icon={
                     state.user !== null
-                      ? { uri: state.photoURL }
+                      ? { uri: state.user.photoURL }
                       : ICONS.profileIcon
                   }
                   title={'Profile'}
